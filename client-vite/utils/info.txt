@@ -1,0 +1,1 @@
+En esta carpeta van funciones o codigo que es util en varias partes del proyecto, por ejemplo, aqui yo guardo mis arrays con informacion harcodeada, entonces puedo acceder a ellos en diferentes componentes, como si fueran datos traidos desde la API

@@ -1,44 +1,24 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-	name: "Delivery Box",
-	description: "Vive la experiencia de realizar el envio de tus paquetes de forma agíl!.",
+	name: "Delevery Box",
+	description: "Entregue sus paquetes con seguridad y de forma agil.",
 	navItems: [
 		{
 			label: "Home",
 			href: "/",
 		},
     {
-      label: "Docs",
-      href: "/docs",
-    }, 
-	  {
-		label: 'About',
-		href: '/about'
-	  },
-	  {
-		label: 'User',
-		href: '/user'
-	  },
-	  {
-		label: 'Client',
-		href: '/client'
-	  },
-	  {
-		label: 'Piloto',
-		href: '/piloto'
-	  },
-	  {
-		label: 'Admin',
-		href: '/admin'
-	  },
-    {
-      label: "Pricing",
-      href: "/pricing",
+      label: "Client",
+      href: "/client",
     },
     {
-      label: "Blog",
-      href: "/blog",
+      label: "Piloto",
+      href: "/piloto",
+    },
+    {
+      label: "User",
+      href: "/user",
     },
     {
       label: "About",

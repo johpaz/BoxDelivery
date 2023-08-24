@@ -1,0 +1,100 @@
+// Para la dashboard de las imagenes que se mostrarían en el detalle (si comprendí bien la idea de Josué)
+
+// Json para crearlo
+
+const json = {
+  "image": [
+  "https://example.com/image1.jpg",
+    "https://example.com/image2.jpg",
+    "https://example.com/image3.jpg"
+  ],
+  "description": "Description ",
+  "view" : true,
+  "profesionalId": "80"
+};
+
+// Tiene el put y si ponen el view en false, no se vería ninguna publicación, se pueden agregar tantas imagenes como quitar las que quieran
+
+const jsonput = {
+  "image": [
+  "https://example.com/image1.jpg",
+    "https://example.com/image2.jpg",
+    "https://example.com/image3.jpg"
+  ],
+  "description": "Description ",
+  "view" : true,
+  "profesionalId": "80"
+};
+
+// Por si requieren tener un get de todos los profesionalimagesPost()
+
+const allImagesJobs = [
+	{
+		"id": "3342600b-f312-4eee-9f0b-8cae5d4b537c",
+		"image": [
+			"https://example.com/image1.jpg",
+			"https://example.com/image2.jpg"
+		],
+		"description": "Description ",
+		"view": true,
+		"ProfesionalId": 79
+	},
+	{
+		"id": "1bc1654d-3da2-42b0-824f-48a2557def4d",
+		"image": [
+			"https://example.com/image1.jpg"
+		],
+		"description": "Description ",
+		"view": true,
+		"ProfesionalId": 80
+	},
+	{
+		"id": "5a8d994a-c83a-4726-afd2-eea53efb62d9",
+		"image": [
+			"https://example.com/image1.jpg",
+			"https://example.com/image2.jpg",
+			"https://example.com/image3.jpg",
+			"https://example.com/image4.jpg",
+			"https://example.com/image5.jpg",
+			"https://example.com/image6.jpg"
+		],
+		"description": "Descripción prueba",
+		"view": true,
+		"ProfesionalId": null
+	},
+	{
+		"id": "f4dd364e-51b4-4d24-b0de-c15280720bfa",
+		"image": [
+			"https://example.com/image1.jpg",
+			"https://example.com/image2.jpg",
+			"https://example.com/image3.jpg"
+		],
+		"description": "Description Prueba",
+		"view": true,
+		"ProfesionalId": null
+	},
+	{
+		"id": "f45267af-fb01-416a-b1c6-dc52d489a31d",
+		"image": [
+			"https://example.com/image1.jpg",
+			"https://example.com/image2.jpg",
+			"https://example.com/image3.jpg"
+		],
+		"description": "Description Prueba",
+		"view": true,
+		"ProfesionalId": 78
+	},
+	{
+		"id": "40ebce21-e45a-46f8-b0d0-29ce270a401b",
+		"image": [
+			"https://example.com/image1.jpg",
+			"https://example.com/image2.jpg",
+			"https://example.com/image3.jpg",
+			"https://example.com/image4.jpg",
+			"https://example.com/image5.jpg"
+		],
+		"description": "Description Prueba",
+		"view": true,
+		"ProfesionalId": 78
+	}
+];

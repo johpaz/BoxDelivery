@@ -1,0 +1,59 @@
+/* Estilos para el formulario de donaciones */
+.mercado-pago-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+  }
+  
+  .mercado-pago-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .mercado-pago-form .donation-buttons {
+    margin-bottom: 20px;
+  }
+  
+  .mercado-pago-form .donate-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e64949;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .mercado-pago-form .donate-button:hover {
+    background-color: #c53939;
+  }
+  
+  .mercado-pago-form .input-container {
+    margin-bottom: 20px;
+  }
+  
+  .mercado-pago-form .donate-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .mercado-pago-form .increment-button,
+.mercado-pago-form .decrement-button {
+  background-color: #141313;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.mercado-pago-form .increment-button:hover,
+.mercado-pago-form .decrement-button:hover {
+  background-color: #aaa;
+}
+
+  /* Estilos adicionales según necesidades */
+  

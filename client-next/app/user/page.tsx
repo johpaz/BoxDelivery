@@ -1,4 +1,4 @@
-import RegisterForm from '../../components/FormRegister';
+import RegisterForm from '../../components/formRegister';
 
 const UserForm = () => {
   
