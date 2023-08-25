@@ -2,7 +2,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useSessionState } from "./services/zustand/useSession";
- import FormUpdate from "../src/views/DashboardSuppliers/formUpdateProfile/FormUpdateProfile";
+import FormUpdate from "../src/views/DashboardSuppliers/formUpdateProfile/FormUpdateProfile";
 import Categories from "./views/Categories/Categories";
 import HomePage from "../src/views/HomePage/HomePage";
 import FromProvider from "./views/FromProvider/FromProvider";

@@ -1,25 +1,16 @@
+import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import './index.css'
-import * as React from 'react'
+import store from '../services/redux/store/store.js'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 import { ChakraProvider } from '@chakra-ui/react'
-import * as ReactDOM from 'react-dom/client'
-import { extendTheme } from '@chakra-ui/react'
 
-const colors = {
-  brand: {
-    900: '#1a365d',
-    800: '#153e75',
-    700: '#2a69ac',
-  },
-}
-
-const theme = extendTheme({ colors })
-
-const rootElement = document.getElementById('root')
-ReactDOM.createRoot(rootElement).render(
-  <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <App />
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <ChakraProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ChakraProvider>
-  </React.StrictMode>,
+  </Provider>
 )

@@ -14,11 +14,11 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
-import DarkModeToggle from "../../utils/Darkmode/DarkmodeToggle";
-import Logo from "../../assets/categoriesIcons/Logo.png";
-import logodark from "../../assets/categoriesIcons/logodark.png";
+import DarkModeToggle from "../../../utils/Darkmode/DarkmodeToggle";
+import Logo from "../../assets/categoriesIcons/logo1.png";
+import logodark from "../../assets/categoriesIcons/logo1dark.png";
 //import SearchBar from '../SearchBar/SearchBar'
-import NavLink from "../../singleComponents/NavLink";
+import NavLink from "../../../singleComponents/NavLink";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -31,8 +31,7 @@ const Navbar = () => {
   return (
     <nav
       style={{
-         position: "sticky",
-        //position: "fixed",
+        position: "sticky",
         width: '100%',
         top: 0,
         zIndex: 100,
@@ -43,8 +42,10 @@ const Navbar = () => {
         top="0px"
         justifyContent="space-between"
         alignItems="center"
-        padding={4}
+        borderRadius='15px'                         
+        padding={3}
         bg={navbarBgColor}
+        margin="10px"
         as="div"
         textTransform="uppercase"
         fontWeight="bold"
@@ -135,6 +136,7 @@ const Navbar = () => {
           <Button
             variant="solid"
             colorScheme="gray"
+            margin="10px"
             size="md"
             mr={6}
             onClick={() => navigate("/userLogin")}

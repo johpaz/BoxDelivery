@@ -1,17 +1,28 @@
 import React from 'react';
 import { Box, Button, Container, Flex, Heading, Stack, Text, useColorModeValue, useColorMode } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import {getAllTipoVehiculo} from '../../../../services/redux/actions/actions'
+import motoIcon from '../../../assets/categoriesIcons/moto.png';
+import CarryIcon from '../../../assets/categoriesIcons/carry.png';
+import NprIcon from '../../../assets/categoriesIcons/npr.png';
+import NhrIcon from '../../../assets/categoriesIcons/nhr.png';
+import TractomulaIcon from '../../../assets/categoriesIcons/tractomula.png';
 
-import consultoriaIcon from '../../../assets/categoriesIcons/consultoria.png';
-import arteDiseñoIcon from '../../../assets/categoriesIcons/pintura.png';
-import tecnologiaIcon from '../../../assets/categoriesIcons/informatica.png';
-import serviciosIcon from '../../../assets/categoriesIcons/public-service.png';
-import manualidadesIcon from '../../../assets/categoriesIcons/artesanias.png';
+
+
+
 
 const Card = ({ heading, description, icon, cardBgColor, textColor, linkColor, iconBgColor }) => {
+  const dispatch = useDispatch();
+  const tiposVehiculo = useSelector(state => state.tiposVehiculo);
+
+  useEffect(() => {
+    dispatch(getAllTipoVehiculo()); 
+  }, []);
   return (
     <Box
-
       maxW={{ base: 'full', sm: '275px' }}
       w="full"
       borderWidth="1px"
@@ -41,16 +52,12 @@ const Card = ({ heading, description, icon, cardBgColor, textColor, linkColor, i
           </Text>
         </Box>
         
-          <Button as={Link} to="/categories" variant="link" color={linkColor} size="sm">
-            Leer más
-          </Button>
-        
-      </Stack>
+        </Stack>
     </Box>
   );
 };
 
-const CategoriesSection = () => {
+const TipoVehiculoSection = () => {
   // Colores en modo light (mismos que en el componente TopPro)
   const cardBgColor = useColorModeValue('gray.50', 'gray.800');
   const textColor = useColorModeValue('gray.600', 'gray.300');
@@ -67,55 +74,68 @@ const CategoriesSection = () => {
       <Box p={4}>
         <Stack spacing={4} as={Container} maxW="3xl" textAlign="center">
           <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" color={useColorModeValue('gray.900', 'white')}>
-            NUESTRAS CATEGORÍAS
+            NUESTROS VEHICULOS
           </Heading>
-          <Text color={textColor2} fontSize={{ base: 'sm', sm: 'lg' }}>
-            Estas son nuestras categorias donde puedes encontrar las ocupaciones de los servicios que procuras!
+          <Text color={textColor2} fontSize={{ base: 'sm', sm: 'lg' }} textAlign="justify">
+          Explora una Variedad de Tipos de Vehículos para Tus Envíos!
+          <br/>
+          En nuestra plataforma, te ofrecemos una amplia gama de tipos de vehículos disponibles
+          para satisfacer tus necesidades de carga y envíos. Desde opciones de gran capacidad hasta
+          alternativas más compactas, encontrarás la solución perfecta para transportar tus productos
+          de manera eficiente.
+          <br/>
+          Cada tipo de vehículo tiene características únicas que se adaptan a diferentes
+          tipos de carga. Ya sea que estés buscando transportar mercancías pesadas o pequeños
+          paquetes, nuestros tipos de vehículos te brindan la flexibilidad para programar envíos 
+          que se ajusten a tus requisitos específicos.
           </Text>
         </Stack>
 
         <Container maxW="5xl" mt={12}>
           <Flex flexWrap="wrap" gridGap={6} justify="center">
-            <Card
-              heading="Tecnología"
-              icon={<img src={tecnologiaIcon} alt="Tecnología" />}
-              description="Aquí encontrarás ofertas de servicios en todo lo que respecta al área IT"
+          <Card
+              heading="Moto"
+              icon={<img src={motoIcon} alt="Moto" />}
+              description="Motocicleta, vehiculo agil para entregas urgentes, capacidad de Carga en Kilos: 50"
               cardBgColor={cardBgColor}
               textColor={textColor}
               linkColor={linkColor}
               iconBgColor={iconBgColor}
             />
             <Card
-              heading="Arte y Diseño"
-              icon={<img src={arteDiseñoIcon} alt="Arte y Diseño" />}
-              description="Aquí encontraras desde diseñadores e ilustradores hasta decoradores de interior, escenógrafos, entre otros..."
+              heading="Carry"
+              icon={<img src={CarryIcon} alt="Arte y Diseño" />}
+              description="Vehículo de carga ligero,  capacidad de Carga en  Kilos: 700"
+              cardBgColor={cardBgColor}
+              textColor={textColor}
+              linkColor={linkColor}
+              iconBgColor={iconBgColor}
+            />
+          
+            
+            
+            <Card
+              heading="Nhr"
+              icon={<img src={NhrIcon} alt="Nhr" />}
+              description="Camión de carga ligero, capacidad de Carga en Kilos: 3000."
               cardBgColor={cardBgColor}
               textColor={textColor}
               linkColor={linkColor}
               iconBgColor={iconBgColor}
             />
             <Card
-              heading="Consultoría"
-              icon={<img src={consultoriaIcon} alt="Consultoría" />}
-              description="Aquí encontrarás todo tipo de consultorías"
+              heading="Npr"
+              icon={<img src={NprIcon} alt="Tecnología" />}
+              description="Camión de carga mediano, capacidad de Carga en Kilos: 1500"
               cardBgColor={cardBgColor}
               textColor={textColor}
               linkColor={linkColor}
               iconBgColor={iconBgColor}
             />
             <Card
-              heading="Servicios"
-              icon={<img src={serviciosIcon} alt="Servicios" />}
-              description="Aquí encontrarás servicios generales."
-              cardBgColor={cardBgColor}
-              textColor={textColor}
-              linkColor={linkColor}
-              iconBgColor={iconBgColor}
-            />
-            <Card
-              heading="Manualidades"
-              icon={<img src={manualidadesIcon} alt="Manualidades" />}
-              description="Aquí encontrarás productos de oficio. Desde orfebres, escultores hasta ceramistas y floristas"
+              heading="Tractomula"
+              icon={<img src={TractomulaIcon} alt="Tractomula" />}
+              description="Camión de carga pesado, capacidad de Carga Kilos: 30000,"
               cardBgColor={cardBgColor}
               textColor={textColor}
               linkColor={linkColor}
@@ -128,4 +148,4 @@ const CategoriesSection = () => {
   );
 };
 
-export default CategoriesSection;
+export default TipoVehiculoSection;

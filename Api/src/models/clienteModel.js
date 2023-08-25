@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const profileSchema = new mongoose.Schema({
+const clienteProfileSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -15,9 +15,13 @@ const profileSchema = new mongoose.Schema({
   email: String,
   phone: String,
   address: String,
-  // Otros campos adicionales que puedas necesitar
+  rating: {
+    type: Number,
+    default: 0 // Puedes establecer un valor predeterminado para el rating
+  },
+  // Otros campos adicionales que puedas necesitar para el perfil del cliente
 });
 
-const Profile = mongoose.model('Profile', profileSchema);
+const ClienteProfile = mongoose.model('ClienteProfile', clienteProfileSchema);
 
-module.exports = Profile;
+module.exports = ClienteProfile;

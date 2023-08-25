@@ -1,57 +1,65 @@
 import {
-  GET_ALL_SUPPLIERS,
-  GET_CATEGORIES,
-  SEARCH_PROFESSIONALS,
+  GET_ALL_PILOTOS,
+  GET_PILOTOS_TOP,
+  GET_TIPO_VEHICULO,
+  SEARCH_PILOTO,
   APPLY_FILTERS,
-  GET_OCUPATION_BY_NAME,
-  UPDATE_PROFESIONAL,
-  POST_PROFESIONAL,
-  GET_INFO_PROFESIONALS,
+  GET_ALL_CLIENTS,
+  UPDATE_PILOTO,
+  SOLICITUD_SERVICIO,
+  GET_INFO_PILOTO,
+  GET_TIPO_VEHICULO_NAME,
+  UPDATE_CLIENT,
 } from '../actionsTypes/actionsType'
 import { filterSuppliers } from '../filters/reduxFilters'
 
 const initialState = {
-  suppliers: [],
-  ocupations: [],
-  backup: [],
-  categories: [],
+  pilotos: [],
+  pilotosTop: [],
+  tipoVehiculo: [],
+  pilotoFav: [],
+  mediosPago: [],
   clients: [],
-  filteredCategories: [],
-  filteredSuppliers: [],
-  suppliersByname:[],
-  profesionales:[],
+  filteredTipoVehiculo: [],
+  filteredPiloto: [],
+  tipoVehiculoByname:[],
+  servicios:[],
   feedback: null,
   error: null,
   filters: {
-    category: 'Categorias',
-    ocupation: 'Ocupacion',
+    tipoVehiculo: 'Tipo Vehiculo',
+    piloto: 'Piloto',
     rating: 'Rating',
-    genre: 'Genero'
-  },
+    },
   session: [],
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALL_SUPPLIERS:
+    case GET_ALL_PILOTOS:
       return {
         ...state,
-        backup: action.payload,
-        suppliers: filterSuppliers(action.payload, state.filters)
-      }
-    case GET_CATEGORIES:
+        pilotos: action.payload,
+        
+     }
+     case GET_PILOTOS_TOP:
       return {
         ...state,
-        categories: action.payload
+        pilotosTop: action.payload,
+     }
+    case GET_TIPO_VEHICULO:
+      return {
+        ...state,
+        tipoVehiculo: action.payload
       }
       //! esta es para traer los profesionales por el nombre de la ocupacion y renderizarlos en categories, se implementa en la searchBar
-      case GET_OCUPATION_BY_NAME:
+      case GET_TIPO_VEHICULO_NAME:
         return {
           ...state,
-          suppliersByname: action.payload
+          tipoVehiculoByname: action.payload
         }
            //! actualizar profesional // preguntar cual es el estado a actualizar
-      case UPDATE_PROFESIONAL:
+      case UPDATE_PILOTO:
         return {
           ...state,
           session: action.payload, 
@@ -61,48 +69,30 @@ const reducer = (state = initialState, action) => {
         ...state,
         filters: { ...state.filters, [action.payload.filter]: action.payload.value }
       }
-    case SEARCH_PROFESSIONALS:
+    case SEARCH_PILOTO:
       return {
         ...state,
-        professionals: action.payload
+        piloto: action.payload
       }
    
-      case "GET_ALL_CLIENTS":
+      case GET_ALL_CLIENTS:
       return {
         ...state,
         clients: action.payload,
       };
-    case "UPDATE_CLIENT":
+    case UPDATE_CLIENT:
       return {
         ...state,
         clients: state.clients.map((client) =>
           client.id === action.payload.id ? action.payload : client
         ),
       }; 
-      case POST_PROFESIONAL:
+      case SOLICITUD_SERVICIO:
         return {
           ...state,
-          profesionales: action.payload,
+          servicios: action.payload,
         }
-      case 'UPDATE_FEEDBACK_SUCCESS':
-        return {
-          ...state,
-          feedback: action.payload,
-          error: null,
-        };
-      case 'UPDATE_FEEDBACK_ERROR':
-        return {
-          ...state,
-          feedback: null,
-          error: action.payload,
-        }; case GET_INFO_PROFESIONALS:
-        return {
-          ...state,
-          profesionales: action.payload,
-        }
-
-    //! caso por default
-    default:
+     default:
       return { ...state }
   }
 }

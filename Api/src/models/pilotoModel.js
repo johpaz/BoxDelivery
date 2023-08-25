@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const profileSchema = new mongoose.Schema({
+const pilotoProfileSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -11,13 +11,27 @@ const profileSchema = new mongoose.Schema({
     ref: 'Role',
     required: true
   },
+  name:String,
   profileImage: String,
   email: String,
   phone: String,
   address: String,
-  // Otros campos adicionales que puedas necesitar
+  isPiloto: Boolean,
+  rating: {
+    type: Number,
+    default: 5 
+  },
+  lat: {
+    type: Number,
+    default: null,
+  },
+  lon: {
+    type: Number,
+    default: null,
+  },
+  // Otros campos adicionales que puedas necesitar para el perfil del piloto
 });
 
-const Profile = mongoose.model('Profile', profileSchema);
+const PilotoProfile = mongoose.model('PilotoProfile', pilotoProfileSchema);
 
-module.exports = Profile;
+module.exports = PilotoProfile;

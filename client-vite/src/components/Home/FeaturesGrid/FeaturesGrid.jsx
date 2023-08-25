@@ -17,23 +17,23 @@ import { CheckIcon } from '@chakra-ui/icons'
 const features = [
   {
     id: 1,
-    title: 'No salgas de tu casa',
-    text: 'Nuestro sitio permite ubicar los servicios que esten dentro de tu zona'
+    title: 'Comodidad en tu Hogar',
+    text: 'Nuestra aplicación te permite acceder a envios directamente desde la comodidad de tu computadora o celular. ¡la solución está a solo unos clics de distancia!'
   },
   {
     id: 2,
-    title: 'Transaccion segura',
-    text: 'Somos garantía del servicio que ofrecen las personas del sitio'
+    title: 'Seguridad en cada Transacción',
+    text: 'Puedes confiar en la seguridad de cada transacción. Somos la garantía de que los servicios brindados por nuestra comunidad son confiables y seguros.'
   },
   {
     id: 3,
-    title: 'Busqueda focalizada',
-    text: 'Navega entre nuestras categorias para dar exactamente con lo que estas buscando'
+    title: 'Entrega Precisa y Eficiente',
+    text: 'Navega a través de nuestras tipos de vehiculos para encontrar  el que necesitas. Con los datos de tu carga la solución ideal está al alcance de tu mano.'
   },
   {
     id: 4,
     title: 'Tu opinion importa',
-    text: 'Nuestro sitio es una experiencia basada en el usuario. Por lo que tu interaccion es muy valiosa para nosotros'
+    text: 'Valoramos tu opinión. Nuestra plataforma está diseñada pensando en los usuarios, y tu interacción es fundamental para nosotros. Tu retroalimentación nos ayuda a mejorar y a ofrecer una experiencia aún mejor.'
   }
 ];
 
@@ -41,7 +41,7 @@ export default function FeaturesGrid() {
   const { colorMode } = useColorMode();
 
   // Definir el color de fondo según el modo de color
-  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.100';
+  const backgroundColor = colorMode === 'dark' ? 'gray.800' : 'gray.100';
   const textColor = useColorModeValue('blue.900', 'blue.400');
   const colorText = useColorModeValue('blue.900', 'gray.100');
   const titleColor = useColorModeValue('gray.900','gray.100');
@@ -50,9 +50,9 @@ export default function FeaturesGrid() {
   return (
     <Box p={4} h='100%' width='100%' backgroundColor={backgroundColor}>
       <Stack spacing={4} as={Container} maxW='3xl' textAlign='center' color={titleColor}>
-        <Heading fontSize='3xl'>UNA SOLUCIÓN PARA CADA NECESIDAD</Heading>
+        <Heading fontSize='3xl'  marginTop="2em">UNA SOLUCIÓN PARA TUS ENVIOS</Heading>
         <Text color={textColor} fontSize='xl'>
-          Esta página ofrece muchas ventajas. Nuestro servicio se encarga de hacer el match perfecto para la solucion a tus problemas.
+        Nuestra plataforma ofrece una serie de ventajas que hacen que la experiencia sea excepcional. Estamos aquí para conectar perfectamente la solución que necesitas con tus problemas cotidianos.
         </Text>
       </Stack>
 
@@ -64,10 +64,10 @@ export default function FeaturesGrid() {
                 <Icon as={CheckIcon} />
               </Box>
               <VStack align='start'>
-                <Text fontWeight={600} color={colorText}>
+                <Text fontWeight={600} color={colorText} >
                   {feature.title}
                 </Text>
-                <Text color={useColorModeValue('gray.600', 'white')}>{feature.text}</Text>
+                <Text color={useColorModeValue('gray.600', 'white')} textAlign="justify">{feature.text}</Text>
               </VStack>
             </HStack>
           ))}

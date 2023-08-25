@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { useSessionState } from "../services/zustand/useSession";
 import { Routes, Route, useLocation } from "react-router-dom";
 import HomePage from "../src/views/HomePage/HomePage";
-import './App.css'
+import Navbar from "./components/navBar/Navbar";
+
 
 function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);

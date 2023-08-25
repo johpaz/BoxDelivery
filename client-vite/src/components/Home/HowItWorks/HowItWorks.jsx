@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import styles from './HowItWorks.module.css';
+import userImage from '../../../assets/defaultImages/userApp1.png'
 
 export default function HowItWorks() {
   const { colorMode } = useColorMode();
@@ -49,7 +50,7 @@ export default function HowItWorks() {
               className={styles['tracking-in-contract']}
               color={proTextColor} // Set the color for "Pro" based on the color mode
             >
-              Pro
+              Go
             </Text>
            
             <Text
@@ -58,17 +59,29 @@ export default function HowItWorks() {
              
               className={styles['tracking-in-contract']}
             >
-              Finder
+              Fleet
             </Text>
           </Heading>
-          <Text fontSize={{ base: 'md', lg: 'lg' }} color={colorText}>
-            Este sitio es un nexo entre problemas y soluciones. Tienes una
-            necesidad, contactas con quien pueda solucionar y listo! Problema
-            resuelto!!
+          <Text fontSize={{ base: 'md', lg: 'lg' }} color={colorText} textAlign="justify">
+            Nuestra aplicación redefine la experiencia de solicitud y entrega de paquetes
+            al combinar la tecnología de vanguardia con la conveniencia del día a día.
+            Diseñada pensando en la eficiencia y la comodidad, esta plataforma innovadora 
+            permite a los usuarios solicitar una amplia gama de servicios, desde entregas 
+            hasta transporte personalizado, con tan solo unos pocos toques en sus dispositivos móviles.
+            Con una interfaz intuitiva y amigable, los usuarios pueden personalizar sus solicitudes, 
+            seleccionar sus medios de pago preferidos y rastrear en tiempo real la ubicación de los 
+            proveedores de servicios, todo en un solo lugar.!!
             <br />
-            Muchos profesionales nos eligen para postular sus servicios, al
-            igual que muchos clientes satisfechos por el uso de nuestra
-            plataforma.
+            La aplicación destaca por su énfasis en la seguridad y confiabilidad.
+            Los proveedores de servicios son cuidadosamente verificados para garantizar
+            la calidad y confianza. Los usuarios pueden evaluar y comentar sobre las experiencias,
+            formando una comunidad de confianza y mejorando la calidad de los servicios.
+            <br />
+            La aplicación simplifica las solicitudes de servicios, permitiendo a los usuarios
+            personalizar y gestionar fácilmente sus necesidades diarias. Ya sea una entrega 
+            urgente o un traslado, la plataforma agiliza el proceso, ahorrando tiempo y simplificando
+            la complejidad. Con tecnología avanzada y enfoque en la satisfacción, la aplicación 
+            mejora la forma en que se acceden y gestionan los servicios.
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button
@@ -105,11 +118,14 @@ export default function HowItWorks() {
         </Stack>
       </Flex>
       <Flex flex={1}>
-        <Image
-          alt="Login Image"
-          objectFit="cover"
-          src="https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-        />
+      <Image
+        alt="User Image"
+        objectFit="cover"
+        marginTop="1em"        
+        src={userImage}
+        borderRadius="2em"
+        boxSize={{ base: "40em", md: "48em", lg: "48em" }} // Ajusta los tamaños según tus necesidades
+      />
       </Flex>
     </Flex>
   );

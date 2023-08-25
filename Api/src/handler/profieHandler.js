@@ -17,10 +17,10 @@ const handleCreateProfile = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { userId, role, profileImage, email, phone, address } = req.body;
+  const { userId, name,role, profileImage, email, phone, address,isPiloto } = req.body;
 
   try {
-    const result = await createProfileWithImage(userId, role, profileImage, email, phone, address);
+    const result = await createProfileWithImage(userId, name, role, profileImage, email, phone, address, isPiloto);
     return res.status(200).json(result);
   } catch (error) {
     console.error('Error al crear el perfil:', error);

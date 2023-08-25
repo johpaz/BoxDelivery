@@ -2,43 +2,60 @@
 import { API } from "../../../utils/API/constants";
 import axios from "axios";
 import {
-  GET_ALL_SUPPLIERS,
-  GET_CATEGORIES,
-  SEARCH_PROFESSIONALS,
+  GET_ALL_PILOTOS,
+  GET_PILOTOS_TOP,
+  GET_TIPO_VEHICULO,
+  SEARCH_PILOTO,
   APPLY_FILTERS,
-  //GET_OCUPATION_BY_NAME,
-  UPDATE_PROFESIONAL,
-  GET_INFO_PROFESIONALS,
-  POST_PROFESIONAL,
+  GET_TIPO_VEHICULO_NAME,
+  UPDATE_PILOTO,
+  GET_INFO_PILOTO,
+  SOLICITUD_SERVICIO,
+  GET_ALL_CLIENTS,
 } from "../actionsTypes/actionsType";
 
-//! Action para obtener a todos los Proveedores/Profesionales
-const getAllSuppliers = () => {
-  // const URL = `${API.LOCALHOST}/profesional`
-  const URL = `${API.DBONLINE}/profesional`;
-
+//! Action para obtener a todos los Pilotos
+const getAllPilotos = () => {
+  const URL = `${API.LOCALHOST}/piloto`
   return function (dispatch) {
     axios
       .get(URL)
       .then((response) => {
-        dispatch({ type: GET_ALL_SUPPLIERS, payload: response.data });
+        dispatch({ type: GET_ALL_PILOTOS, payload: response.data });
       })
       .catch((error) => console.error(error.message));
   };
 };
 
-//! Todas las categorias con su ID
-const getAllCategories = () => {
-  // const URL = `${API.LOCALHOST}/category`
-  const URL = `${API.DBONLINE}/category`;
+//! Action para obtener los 5 pilotos con mejores calificaciones (rating)
+const getPilotosTop = () => {
+  return function (dispatch, getState) {
+    const { pilotos} = getState(); // Obtener los datos de pilotos desde el estado
+    console.log(pilotos);
+    const sortedPilotos = [...pilotos]; // Copiar los datos de pilotos para no modificar el estado original
 
-  return function (dispatch) {
+    // Ordenar los pilotos por rating de manera descendente
+    sortedPilotos.sort((a, b) => b.rating - a.rating);
+    console.log(sortedPilotos);
+    // Tomar los primeros 5 pilotos (los mejores)
+    const topPilotos = sortedPilotos.slice(0, 5);
+    console.log(topPilotos);
+
+    dispatch({ type: GET_PILOTOS_TOP, payload: topPilotos });
+  };
+};
+
+
+//! Todas las categorias con su ID
+const getAllTipoVehiculo = () => {
+  const URL = `${API.LOCALHOST}/tipovehiculo`
+   return function (dispatch) {
     fetch(URL)
       .then((response) => response.json())
       .then((results) => {
         // console.log(results);
         dispatch({
-          type: GET_CATEGORIES,
+          type: GET_TIPO_VEHICULO,
           payload: results,
         });
       })
@@ -48,9 +65,8 @@ const getAllCategories = () => {
 
 //! action para buscar por nombre de profesion //*****Revisar si aun se esta usando si no borrar */
 const searchProfessionals = (name) => {
-  // const URL = `${API.LOCALHOST}/ocupationsp/?name=${name}`
-  const URL = `${API.DBONLINE}/ocupationsp?name=${name}`;
-
+  const URL = `${API.LOCALHOST}/ocupationsp/?name=${name}`
+  
   return function (dispatch) {
     if (name) {
       // Verificar si name no es undefined
@@ -59,7 +75,7 @@ const searchProfessionals = (name) => {
         .then((response) => {
           console.info(response.data);
           dispatch({
-            type: SEARCH_PROFESSIONALS,
+            type: SEARCH_PILOTO,
             payload: response.data,
           });
         })
@@ -68,32 +84,15 @@ const searchProfessionals = (name) => {
   };
 };
 
-// const getOcupationsByName = (name) => {
-//   const URL = "https://backprofinder-production.up.railway.app/ocupations";
-//   return async function (dispatch) {
-//     try {
-//       let response = await axios.get(`${URL}?name=${name}`);
-//       console.log(response.data);
-//       if (response.data) {
-//         return dispatch({
-//           type: GET_OCUPATION_BY_NAME,
-//           payload: response.data,
-//         });
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
+
 
 const applyFilters = (objFilters) => {
   return { type: APPLY_FILTERS, payload: objFilters };
 };
 
 const postServicio = (info) => {
-  // const URL = `${API.LOCALHOST}/postprofesional`
-  const URL = `${API.DBONLINE}/postprofesional`;
-
+  const URL = `${API.LOCALHOST}/servicio`
+  
   return async function () {
     try {
       // Verificación
@@ -111,93 +110,20 @@ const postServicio = (info) => {
       await axios.post(URL, info, {
         headers: { "Access-Control-Allow-Origin": "*" },
       });
-      alert("Publicacion Exitosa!")
+      alert("Solicitud de servicio Exitosa!")
      
     } catch (error) {
       console.error(error.response.data.error);
       alert(`${error.response.data.error}`);
     }
   };
-};
+}
 
-//! Postear proveedor
-const postProveedor = (info) => {
-  const userSession = window.localStorage.getItem("userSession");
-  if (userSession) {
-    const user = JSON.parse(userSession);
-    info.id = user.id;
-  }
 
-  // const URL = `${API.LOCALHOST}/profesional/${info.id}`
-  const URL = `${API.DBONLINE}/profesional/${info.id}`;
-
-  return async function () {
-    try {
-      // Verificación
-      if (
-        info.name === "" ||
-        info.email === "" ||
-        info.image === "" ||
-        info.genre === "" ||
-        info.years_exp === "" ||
-        info.password === "" ||
-        info.CountryId === "" ||
-        info.LocationId === "" ||
-        info.phone === "" ||
-        info.ocupations === "" ||
-        info.categories === 0
-      ) {
-        throw new Error("Faltan datos");
-      }
-
-      await axios.put(URL, info, {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      });
-      
-    } catch (error) {
-      console.error(error.response.data.error);
-      alert(`${error.response.data.error}`);
-    }
-  };
-};
-
-//! Postear cliente
-const postCliente = (info) => {
-  const userSession = window.localStorage.getItem("userSession");
-  if (userSession) {
-    const user = JSON.parse(userSession);
-    info.id = user.id;
-  }
-
-  // const URL = `${API.LOCALHOST}/client/${info.id}`
-  const URL = `${API.DBONLINE}/client/${info.id}`;
-
-  return async function () {
-    try {
-      // Verificación
-      if (
-        info.name === "" ||
-        info.email === "" ||
-        info.phone === "" ||
-        // info.image === "" ||
-        info.password === 0
-      ) {
-        throw new Error("Faltan datos");
-      }
-
-      await axios.put(URL, info, {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      });
-    } catch (error) {
-      alert(`${error.response.data.error}`);
-    }
-  };
-};
 
 const loginSessionGoogle = () => {
-  // const URL = `${API.LOCALHOST}/auth/google`
-  const URL = `${API.DBONLINE}/auth/google`;
-
+  const URL = `${API.LOCALHOST}/auth/google`
+  
   return async function () {
     await fetch(URL)
       .then((response) => {
@@ -220,8 +146,8 @@ const getSessionUser = (dataSession) => {
   };
 
   return async function () {
-    // const URL = `${API.LOCALHOST}/login`
-    const URL = `${API.DBONLINE}/login`;
+    const URL = `${API.LOCALHOST}/login`
+   
 
     try {
       const response = await fetch(URL, options);
@@ -246,8 +172,8 @@ const postSessionUser = (dataSession) => {
     body: JSON.stringify(dataSession),
   };
 
-  // const URL = `${API.LOCALHOST}/register`
-  const URL = `${API.DBONLINE}/register`;
+  const URL = `${API.LOCALHOST}/register`
+  
 
   return async function () {
     try {
@@ -263,32 +189,13 @@ const postSessionUser = (dataSession) => {
   };
 };
 
-//! Traigo profesionales  para renderizar sus post
-const getProfesionals = () => {
-  // const URL = `${API.LOCALHOST}/profesional`
-  const URL = `${API.DBONLINE}/profesional`;
 
-  return async function (dispatch) {
-    try {
-      let response = await axios.get(`${URL}`);
-    //  console.log(response.data);
-      if (response.data) {
-        return dispatch({
-          type: GET_INFO_PROFESIONALS,
-          payload: response.data,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
 
 //! Actualizar Profesionales
-const updateProfesionals = (data, id) => {
+const updatePiloto = (data, id) => {
   // console.log(id);  // el id llega bien***** falta la data
-  // const URL = `${API.LOCALHOST}/profesional/${id}`
-  const URL = `${API.DBONLINE}/profesional/${id}`;
+  const URL = `${API.LOCALHOST}/piloto/${id}`
+  
 
   return async function (dispatch) {
     try {
@@ -296,7 +203,7 @@ const updateProfesionals = (data, id) => {
       if (response && response.data) {
         // console.log(response.data);
         dispatch({
-          type: UPDATE_PROFESIONAL,
+          type: UPDATE_PILOTO,
           payload: response.data,
         });
       } else {
@@ -310,15 +217,15 @@ const updateProfesionals = (data, id) => {
 
 // Action para obtener todos los clientes
 const getAllClients = () => {
-  // const URL = `${API.LOCALHOST}/client`
-  const URL = `${API.DBONLINE}/client`;
+   const URL = `${API.LOCALHOST}/cliente`
+  
 
   return function (dispatch) {
     axios
       .get(URL)
       .then((response) => {
         console.log(response.data);
-        dispatch({ type: "GET_ALL_CLIENTS", payload: response.data });
+        dispatch({ type: GET_ALL_CLIENTS, payload: response.data });
       })
       .catch((error) => {
         console.error(error.message);
@@ -334,14 +241,13 @@ const updateClient = (clientId, newData) => {
     newData.id = userSession.id;
   }
 
-  // const URL = `${API.LOCALHOST}/client/${newData.id}`
-  const URL = `${API.DBONLINE}/client/${newData.id}`;
+  const URL = `${API.LOCALHOST}/cliente/${newData.id}`
 
   return function (dispatch) {
     axios
       .put(URL, newData)
       .then((response) => {
-        dispatch({ type: "UPDATE_CLIENT", payload: response.data });
+        dispatch({ type: UPDATE_CLIENT, payload: response.data });
       })
       .catch((error) => {
         console.error(error.message);
@@ -349,14 +255,14 @@ const updateClient = (clientId, newData) => {
   };
 };
 
-export const getPostProfesional = () => {
-  // const URL = `${API.LOCALHOST}/profesional`
-  const URL = `${API.DBONLINE}/profesional`;
+export const getSolicitudServicio = () => {
+  const URL = `${API.LOCALHOST}/servicio`
+  
 
   return async function (dispatch) {
     try {
       const response = await axios.get(URL);
-      dispatch({ type: POST_PROFESIONAL, payload: response.data });
+      dispatch({ type: SOLICITUD_SERVICIO, payload: response.data });
     } catch (error) {
       console.error(error.message);
     }
@@ -403,22 +309,8 @@ const updateFeedbackError = (error) => {
 };
 
 export {
-  getAllSuppliers,
-  getAllCategories,
-  getAllClients,
-  postProveedor,
-  applyFilters,
-  postCliente,
-  //getOcupationsByName,
-  getSessionUser,
-  postSessionUser,
-  loginSessionGoogle,
-  searchProfessionals,
-  postServicio,
-  getProfesionals,
-  updateProfesionals,
-  updateClient,
-  updateFeedback,
-  updateFeedbackSuccess,
-  updateFeedbackError,
+  getAllPilotos,
+  getAllTipoVehiculo,
+  getPilotosTop
+  
 };

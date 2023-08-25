@@ -4,7 +4,7 @@ import { useColorModeValue } from '@chakra-ui/color-mode'
 import { useNavigate } from 'react-router'
 
 export default function NavLink ({ textLink, routeLink }) {
-  const navigate = useNavigate()
+  //const navigate = useNavigate()
   return (
     <Link
       px={2}
