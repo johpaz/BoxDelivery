@@ -12,7 +12,6 @@ const profileSchema = new mongoose.Schema({
     required: true
   },
   profileImage: String,
-  email: String,
   phone: String,
   address: String,
   // Otros campos adicionales que puedas necesitar

@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import React from 'react';
 import {
   Box,
   Flex,
@@ -17,53 +17,54 @@ import {
   Image,
   useToast,
   useColorMode
-} from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
-import { useNavigate } from 'react-router-dom'
-import { useSessionState } from '../../services/zustand/useSession'
-import NavLink from '../../singleComponents/NavLink'
-import Logo from '../../assets/categoriesIcons/Logo.png'
-import logodark from "../../assets/categoriesIcons/logodark.png";
-import SinFoto from '../../assets/defaultImages/sinfoto.webp'
-import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle'
-import { useSelector } from "react-redux";
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { useNavigate } from 'react-router-dom';
+import NavLink from '../../singleComponents/NavLink';
+import Logo from '../../assets/categoriesIcons/logo1.png';
+import logodark from "../../assets/categoriesIcons/logo1dark.png";
+import SinFoto from '../../assets/defaultImages/sinfoto.webp';
+import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle';
+import { useSelector,useDispatch } from "react-redux";
+import { removeSessionState } from '../../services/redux/slice/sessionSlice';
 
-export default function LoggedNavbar () {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const navigate = useNavigate()
-  const toast = useToast()
-  const session = useSessionState(state => state.session)
+
+export default function LoggedNavbar() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+  const toast = useToast();
+  const session = useSelector(state => state.session);
   const { colorMode } = useColorMode();
-  const removeSessionState = useSessionState(state => state.removeSessionState)
-  const profesionalesimg = useSelector((state) => state.profesionales);
+  const dispatch = useDispatch();
 
-  // const filteredImage = profesionalesimg.filter((image) => image.id === session.id);
-  // console.log(filteredImage)
 
-  function handleLogout () {
-    removeSessionState()
-    window.localStorage.removeItem('userSession')
-    window.localStorage.removeItem('rol')
-    toast({
-      title: 'Sesion finalizada',
+  function handleLogout() {
+   
+  
+    // Llama a la acción para borrar los datos de la sesión en el estado
+    dispatch(removeSessionState());
+  
+      // Puedes agregar aquí la lógica para cerrar la sesión si es necesario
+    window.localStorage.removeItem('userSession');
+      toast({
+      title: 'Sesión finalizada',
       description: 'Esperamos verte de nuevo',
       status: 'success',
       position: 'bottom-right',
       duration: 5000,
       isClosable: true
-    })
+    });
     window.scroll({
       top: 0,
       left: 0,
       behavior: 'smooth'
-    })
-    navigate('/')
+    });
+    navigate('/');
   }
 
   return (
     <nav style={{
-       position: "sticky",
-      //position: "fixed",
+      position: "sticky",
       width: '100%',
       top: 0,
       zIndex: 100,
@@ -92,8 +93,8 @@ export default function LoggedNavbar () {
             <Box onClick={() => navigate('/')} _hover={{ cursor: 'pointer' }}>
               <Image
                 src={colorMode === "light" ? Logo : logodark}
-               width={{ base: "50%", md: "100%", lg: "100%" }}
-               height="70px"
+                width={{ base: "50%", md: "100%", lg: "100%" }}
+                height="70px"
               />
             </Box>
             <HStack
@@ -103,7 +104,7 @@ export default function LoggedNavbar () {
               fontSize='1.15rem'
               fontWeight='bold'
             >
-              <NavLink textLink='¿COMO FUNCIONA?' routeLink='/comofunciona' />
+              <NavLink textLink='¿CÓMO FUNCIONA?' routeLink='/comofunciona' />
               <NavLink textLink='PROFESIONALES' routeLink='/categories' />
               <NavLink textLink='CONTACTO' routeLink='/feedback' />
               <NavLink textLink='ACERCA DE' routeLink='/aboutus' />
@@ -123,24 +124,24 @@ export default function LoggedNavbar () {
               >
                 <Avatar
                   size={{ base: 'md', md: 'lg', lg: 'lg' }}
-                  src={ session.image || SinFoto}
+                  src={session.image || SinFoto}
                 />
-              </MenuButton> 
+              </MenuButton>
               <MenuList>
                 {
-                (session.usuario === 'c')
+                (session.userType === 'cliente')
                   ? <MenuItem onClick={() => navigate('/dashboardClient')}>Dashboard</MenuItem>
-                  : session.usuario === 'p'
-                    ? <MenuItem onClick={() => navigate('/dashboardSuppliers')}>Dashboard</MenuItem>
-                    : session.usuario === 'a'
+                  : session.userType=== 'piloto'
+                    ? <MenuItem onClick={() => navigate('/dashboardPiloto')}>Dashboard</MenuItem>
+                    : session.userType === 'admin'
                       ? <MenuItem onClick={() => navigate('/dashboardAdmin/manageProfesional')}>Dashboard</MenuItem>
                       : null
                 }
-                {/* {
-                  (session.usuario === 'p')
-                    ? <MenuItem onClick={() => navigate('/detail/suplier/:id')}>Ver mi perfil</MenuItem>
+                {
+                  (session.userType === 'piloto')
+                    ? <MenuItem onClick={() => navigate('/registerCliente')}>Ver mi perfil</MenuItem>
                     : null
-                } */}
+                }
                 <MenuDivider />
                 <MenuItem onClick={handleLogout}>Cerrar sesion</MenuItem>
               </MenuList>
@@ -155,15 +156,15 @@ export default function LoggedNavbar () {
               display={{ md: 'none' }}
             >
               <Stack as='nav' spacing={4}>
-                <NavLink textLink='¿Como funciona?' routeLink='/comofunciona' />
+                <NavLink textLink='¿Cómo funciona?' routeLink='/comofunciona' />
                 <NavLink textLink='Profesionales' routeLink='/categories' />
                 <NavLink textLink='Contacto' routeLink='/feedback' />
                 <NavLink textLink='Acerca de' routeLink='/aboutus' />
               </Stack>
             </Box>
-            )
+          )
           : null}
       </Box>
     </nav>
-  )
+  );
 }

@@ -14,11 +14,10 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
-import DarkModeToggle from "../../../utils/Darkmode/DarkmodeToggle";
+import DarkModeToggle from "./../../utils/Darkmode/DarkmodeToggle";
 import Logo from "../../assets/categoriesIcons/logo1.png";
 import logodark from "../../assets/categoriesIcons/logo1dark.png";
-//import SearchBar from '../SearchBar/SearchBar'
-import NavLink from "../../../singleComponents/NavLink";
+import NavLink from "./../../singleComponents/NavLink";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -104,23 +103,18 @@ const Navbar = () => {
               >
                 Acerca de
               </MenuItem>
+              
               <MenuItem
                 color={useColorModeValue("gray.900", "gray.100")}
                 onClick={() => navigate("/userLogin")}
               >
-                Iniciar sesion
+                Iniciar Sesion
               </MenuItem>
               <MenuItem
                 color={useColorModeValue("gray.900", "gray.100")}
-                onClick={() => navigate("/registerCliente")}
+                onClick={() => navigate("/userRegister")}
               >
-                Registrarse cliente
-              </MenuItem>
-              <MenuItem
-                color={useColorModeValue("gray.900", "gray.100")}
-                onClick={() => navigate("/registerProvider")}
-              >
-                Registrarse profesional
+                Registrarse
               </MenuItem>
             </MenuList>
           </Menu>
@@ -133,53 +127,30 @@ const Navbar = () => {
           display={{ base: "none", md: "block", lg: "row" }}
           justifyContent="space-between"
         >
-          <Button
-            variant="solid"
-            colorScheme="gray"
-            margin="10px"
-            size="md"
-            mr={6}
-            onClick={() => navigate("/userLogin")}
-          >
-            Iniciar sesion
-          </Button>
           <Menu>
             <MenuButton
               as={Button}
               rightIcon={<ChevronDownIcon />}
-              // bg={useColorModeValue("blue.500", "blue.700")}
-              // color="gray.100"
-              // _hover={{
-              //   bg: "blue.600",
-              // }}
-            >
+              >
               Registrarse
             </MenuButton>
             <MenuList>
               <MenuItem
                 color={useColorModeValue("gray.900", "gray.100")}
-                onClick={() => navigate("/registerProvider")} fontSize="1.2rem"
+                onClick={() => navigate("/userRegister")} fontSize="1.2rem"
                 fontWeight="bold"
               >
-                Soy profesional
+                Registrarse
               </MenuItem>
               <MenuItem
                 color={useColorModeValue("gray.900", "gray.100")}
-                onClick={() => navigate("/registerCliente")} fontSize="1.2rem"
+                onClick={() => navigate("/userLogin")} fontSize="1.2rem"
                 fontWeight="bold"
               >
-                Soy cliente
+                Iniciar Sesion
               </MenuItem>
             </MenuList>
           </Menu>
-          {/* <Button
-            variant='solid'
-            colorScheme='blue'
-            size='md'
-            onClick={() => navigate('/userRegister')}
-          >
-            Registrarse
-          </Button> */}
         </HStack>
       </Flex>
     </nav>

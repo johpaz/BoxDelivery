@@ -10,14 +10,14 @@ import {
   Button,
   useColorModeValue,
   Spinner,
+  
 } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
-
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
-import { getProfesionals } from "../../services/redux/actions/actions";
+//import { getProfesionals } from "../../services/redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { useSessionState } from "../../services/zustand/useSession";
+//import { useSessionState } from "../../services/zustand/useSession";
 
 function PasarelaPagos() {
   const [preferenceId, setPreferenceId] = useState(null);

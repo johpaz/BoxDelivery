@@ -3,7 +3,7 @@ const {Router}= require('express');
 
 const userRouter = require('./useerloginRoutes');
 const loginRouter = require('./loginRoutes')
-const googleRouter = require('./googleRoutes')
+const googleRouter = require('./googleRoutes2')
 const {profileRouter,clienteRouter,pilotoRouter} = require('./profileRoutes')
 const roleRouter = require('./roleRoutes')
 const {vehiculoRouter,vehiculoTypeRouter,} = require('./vehiculoRoutes')
@@ -12,7 +12,7 @@ const permissionRouter = require('./permissionRoutes')
 const asignaPermisosRouter = require('./aisgnaPermisosRoutes')
 const {deliveryRouter,transitoRouter,entregadoRouter}= require('./deliveryRoutes')
 const {medioPagoRouter} = require('./medioPagoRouter')
-
+const loginGoogleRouter=require('./googleRoutes2');
 
 router = Router();
 
@@ -33,7 +33,7 @@ router.use('/piloto', pilotoRouter);
 router.use('/auth', googleRouter);
 router.use('/user', userRouter);
 router.use('/login', loginRouter);
-
+router.use('/auth/google', loginGoogleRouter) //google
 
 
 

@@ -6,10 +6,10 @@ import { Flex, SimpleGrid, Stack } from '@chakra-ui/layout'
 import { Skeleton } from '@chakra-ui/skeleton'
 import { Spinner } from '@chakra-ui/spinner'
 import { CLIENT } from '../../constants'
-import { useClientDash } from '../../../../services/zustand/useClientDash'
+//import { useClientDash } from '../../../../services/zustand/useClientDash'
 const FiltersClient = lazy(() => import('../FiltersDashboard/FiltersClient'))
 const UserRegisterClient = lazy(() => import('../../singleComponents/UserRegisterClient'))
-const NoResults = lazy(() => import('../../../../singleComponents/NoResults'))
+//const NoResults = lazy(() => import('../../../../singleComponents/NoResults'))
 
 export default function UsersTable () {
   const {

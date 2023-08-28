@@ -1,13 +1,9 @@
-const {Router}= require('express');
+const { Router } = require('express');
 
-const {saveUserFromGoogleToken} = require('../controllers/users/googleAuthController'); // Asumiendo que aquí está tu handler
-
-
-// Ruta para manejar la autenticación
-const googleRouter = Router();
+const loginGoogleRouter = Router();
 
 
-googleRouter.post('/', saveUserFromGoogleToken);
+loginGoogleRouter.get('/', function (req,res){ res.send(req.user)});
 
 
-module.exports = googleRouter;
+module.exports = loginGoogleRouter;

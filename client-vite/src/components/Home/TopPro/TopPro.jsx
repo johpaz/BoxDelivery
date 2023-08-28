@@ -1,22 +1,18 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button, Center, Flex, Heading, Image, Stack, Text, useColorModeValue, Icon, useColorMode, Link } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
-import { getPilotosTop } from '../../../../services/redux/actions/actions';
+import { setSessionState,removeSessionState} from '../../../services/redux/slice/sessionSlice'; 
 import { Link as RouterLink } from 'react-router-dom';
-import { useSessionState } from "./../../../../services/zustand/useSession";
+import { useDispatch,useSelector } from 'react-redux';
+
 
 const Card = ({ piloto, cardBgColor, textColor }) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getPilotosTop());
-  }, []);
-
   const ratingStars = Array.from({ length: piloto.rating }, (_, index) => (
     <Icon key={index} as={StarIcon} color="teal.400" />
   ));
-  const session = useSessionState((state) => state.session);  
+  const session = useSelector((state) => state.session);  
   const { colorMode } = useColorMode();
   const backgroundColor = colorMode === 'dark' ? undefined : 'gray.100';
   
@@ -65,15 +61,10 @@ const Card = ({ piloto, cardBgColor, textColor }) => {
 };
 
 const TopPro = ({ cardBgColor,  linkColor }) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPilotosTop());
-  }, []);
-  const pilotosTop = useSelector((state) => state.pilotosTop);
-
-  
-  //const sortedPilotos = [...pilotos].sort((a, b) => b.rating - a.rating);
+  const pilotosTop = useSelector((state) => state.pilotos.pilotos);
+ 
+ 
+  //const sortedPilotos = [...pilotosTop].sort((a, b) => b.rating - a.rating);
   const { colorMode } = useColorMode();
   const backgroundColor = colorMode === 'dark' ? undefined : 'gray.100';
   const textColor = useColorModeValue('blue.900', 'blue.400');
@@ -91,7 +82,7 @@ const TopPro = ({ cardBgColor,  linkColor }) => {
         </Box>
         <Box mt={8} align="center">
           <Box display="grid" gridGap={6} gridTemplateColumns={{ sm: '1fr', md: 'repeat(2, 1fr)' }}>
-            {pilotosTop.map((piloto) => (
+          {pilotosTop.map((piloto) => (
               <Card key={piloto._id} piloto={piloto} cardBgColor={cardBgColor} textColor={textColor} />
             ))}
           </Box>

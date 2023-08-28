@@ -6,9 +6,9 @@ import { Flex, SimpleGrid, Stack } from '@chakra-ui/layout'
 import { Skeleton } from '@chakra-ui/skeleton'
 import { Spinner } from '@chakra-ui/spinner'
 import { URL } from '../../constants'
-import { useProfesionalDash } from '../../../../services/zustand/useProfesionalDash'
+//import { useProfesionalDash } from '../../../../services/zustand/useProfesionalDash'
 const FiltersDashboard = lazy(() => import('../FiltersDashboard/FiltersDashboard'))
-const NoResults = lazy(() => import('../../../../singleComponents/NoResults.jsx'))
+//const NoResults = lazy(() => import('../../../../singleComponents/NoResults.jsx'))
 const UserRegister = lazy(() => import('../../singleComponents/UserRegister'))
 
 export default function UsersTable () {

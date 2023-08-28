@@ -6,7 +6,7 @@ import { Skeleton } from '@chakra-ui/skeleton'
 import { useColorModeValue } from '@chakra-ui/color-mode'
 import { Spinner } from '@chakra-ui/spinner'
 const PostRegister = lazy(() => import('../../singleComponents/PostRegister'))
-const NoResults = lazy(() => import('../../../../singleComponents/NoResults'))
+//const NoResults = lazy(() => import('../../../../singleComponents/NoResults'))
 
 export default function PostUsersTable ({ posts }) {
   const bgColor = useColorModeValue('gray.100', 'gray.900')

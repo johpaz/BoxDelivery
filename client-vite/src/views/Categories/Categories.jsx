@@ -1,10 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Stack, useColorModeValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import {
-  cleanDetail,
-  getAllSuppliers,
-} from "../../services/redux/actions/actions";
+//import { cleanDetail,  getAllSuppliers,} from "../../services/redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import SupplierCardsContainer from "../../components/SupplierCardsContainer/SupplierCardsContainer";
 import FiltersPanel from "../../components/FiltersPanel/FiltersPanel";

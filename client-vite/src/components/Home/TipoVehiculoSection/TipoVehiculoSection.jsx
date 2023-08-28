@@ -2,8 +2,6 @@ import React from 'react';
 import { Box, Button, Container, Flex, Heading, Stack, Text, useColorModeValue, useColorMode } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import {getAllTipoVehiculo} from '../../../../services/redux/actions/actions'
 import motoIcon from '../../../assets/categoriesIcons/moto.png';
 import CarryIcon from '../../../assets/categoriesIcons/carry.png';
 import NprIcon from '../../../assets/categoriesIcons/npr.png';
@@ -15,12 +13,8 @@ import TractomulaIcon from '../../../assets/categoriesIcons/tractomula.png';
 
 
 const Card = ({ heading, description, icon, cardBgColor, textColor, linkColor, iconBgColor }) => {
-  const dispatch = useDispatch();
   const tiposVehiculo = useSelector(state => state.tiposVehiculo);
 
-  useEffect(() => {
-    dispatch(getAllTipoVehiculo()); 
-  }, []);
   return (
     <Box
       maxW={{ base: 'full', sm: '275px' }}
@@ -77,8 +71,8 @@ const TipoVehiculoSection = () => {
             NUESTROS VEHICULOS
           </Heading>
           <Text color={textColor2} fontSize={{ base: 'sm', sm: 'lg' }} textAlign="justify">
-          Explora una Variedad de Tipos de Vehículos para Tus Envíos!
           <br/>
+          Explora una Variedad de Tipos de Vehículos para Tus Envíos!
           En nuestra plataforma, te ofrecemos una amplia gama de tipos de vehículos disponibles
           para satisfacer tus necesidades de carga y envíos. Desde opciones de gran capacidad hasta
           alternativas más compactas, encontrarás la solución perfecta para transportar tus productos

@@ -14,10 +14,7 @@ import {
   Heading,
   ButtonGroup,
 } from "@chakra-ui/react";
-import {
-  postSessionUser,
-  postCliente,
-} from "../../services/redux/actions/actions";
+//import {  postSessionUser,  postCliente,} from "../../services/redux/actions/actions";
 import { useCredentials } from "../../utils/customHooks/useCredentials";
 import PrivacyNotice from "../../components/PrivacyNotice/PrivacyNotice";
 import GoogleAuthButton from "../../singleComponents/GooglAuthButton";

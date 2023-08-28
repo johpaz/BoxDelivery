@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useSessionState } from "../../services/zustand/useSession";
+//import { useSessionState } from "../../services/zustand/useSession";
 // import { useHistory } from 'react-router-dom';
 
 import {
@@ -18,12 +18,9 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 
-import SelectCategories from "../../singleComponents/SelectCategories";
-import { uploadFiles2 } from "../../utils/Firebase/config";
-import {
-  getAllCategories,
-  postServicio,
-} from "../../services/redux/actions/actions";
+import TipoVehiculoSection from "../../components/Home/TipoVehiculoSection/TipoVehiculoSection";
+//import { uploadFiles2 } from "../../utils/Firebase/config";
+//import { getAllCategories, postServicio,} from "../../services/redux/actions/actions";
 import { Link } from "react-router-dom";
 
 function FormServicio() {
@@ -36,7 +33,7 @@ function FormServicio() {
     defaultValues: {
       title: "",
       ocupation: "",
-      category: "",
+      tipoVehiculo: "",
       images: [],
       content: "",
     },
@@ -50,7 +47,7 @@ function FormServicio() {
     dispatch(getAllCategories());
   }, [dispatch]);
 
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedtipoVehiculo, setSelectedtipoVehiculo] = useState("");
   const [selectedOccupations, setSelectedOccupations] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -114,8 +111,8 @@ function FormServicio() {
     setUploadedFiles(updatedFiles);
   };
 
-  const envioCategoria = (value) => {
-    setSelectedCategory(value);
+  const envioTipoVehiculo = (value) => {
+    setSelectedtipoVehiculo(value);
   };
 
   const envioOcupaciones = (value) => {
@@ -130,7 +127,7 @@ function FormServicio() {
       image: imageUrls,
       content: data.content,
       ProfesionalId: session.id,
-      category: selectedCategory,
+      tipoVehiculo: selectedTipoVehiculo,
       ocupation: selectedOccupations,
     };
 
@@ -206,9 +203,9 @@ function FormServicio() {
             </FormControl>
 
             <FormControl w="100%">
-              <FormLabel>Categorías</FormLabel>
-              <SelectCategories
-                fnSelectCategory={envioCategoria}
+              <FormLabel>Tipo Vehiculo</FormLabel>
+              <TipoVehiculoSection
+                fnSelectTipoVehiculo={envioTipoVehiculo}
                 fnSelectOcupation={envioOcupaciones}
               />
             </FormControl>

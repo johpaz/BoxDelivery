@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  name: String,
   email: String,
   password: String,
   isBanned: {
     type: Boolean,
-    default: false // Por defecto, el usuario no está baneado
-  }
+    default: false
+  },
+  refreshToken: String, // Token de actualización para la persistencia de sesión
+  lastLogin: Date,     // Fecha y hora del último inicio de sesión
 });
 
 module.exports = mongoose.model('User', userSchema);

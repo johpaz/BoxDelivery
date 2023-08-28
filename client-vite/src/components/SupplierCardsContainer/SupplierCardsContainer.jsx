@@ -3,7 +3,7 @@ import { lazy, Suspense } from 'react'
 import { Flex, Stack } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 const SupplierCard = lazy(() => import('../SupplierCard/SupplierCard'))
-const NoResults = lazy(() => import('../../singleComponents/NoResults'))
+//const NoResults = lazy(() => import('../../singleComponents/NoResults'))
 
 export default function SupplierCardsContainer ({ visibleSuppliers }) {
   return (

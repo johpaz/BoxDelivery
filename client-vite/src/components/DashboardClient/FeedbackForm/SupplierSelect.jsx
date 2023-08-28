@@ -7,22 +7,22 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/react";
 import { Select } from "chakra-react-select";
-import { getAllSuppliers } from "../../../services/redux/actions/actions";
+//import { getAllSuppliers } from "../../../services/redux/actions/actions";
 
 const SupplierSelect = ({ onSupplierSelect }) => { // Agregamos la prop onSupplierSelect
   const dispatch = useDispatch();
   const suppliers = useSelector((state) => state.suppliers);
   const [selectedSupplier, setSelectedSupplier] = useState(null);
 
-  useEffect(() => {
-    dispatch(getAllSuppliers());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllSuppliers());
+  // }, [dispatch]);
 
   // Transformando los datos de los proveedores al formato esperado por el Select
-  const supplierOptions = suppliers.map((supplier) => ({
-    value: supplier.id,
-    label: supplier.name,
-  }));
+  // const supplierOptions = suppliers.map((supplier) => ({
+  //   value: supplier.id,
+  //   label: supplier.name,
+  // }));
 
   // Función que se activa cuando se selecciona un proveedor
   const handleSupplierSelect = (selectedOption) => {

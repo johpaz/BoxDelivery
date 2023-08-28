@@ -59,6 +59,20 @@ passport.use(new LocalStrategy(
   }
 ));
 
+//Para mensaje flash e inicios de sesion:
+const flash = require('connect-flash');
+
+const authgoogle= require ('../src/middlewares/google/google')
+const loginGoogleRouter = require('./routes/googleRoutes.js');
+
+app.use('/auth',  passport.authenticate(authgoogle,{
+  scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+  ],
+session: false,
+}), loginGoogleRouter);
+
 app.use('/', index);
 
 const port = process.env.PORT || 3004; // Default to port 3004 if not provided

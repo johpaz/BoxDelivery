@@ -30,6 +30,8 @@ import PasarelaPagos from "./views/PasarelaPagos/PasarelaPagos";
 import PostsSuppliers from "./views/DashboardSuppliers/PostSuppliers/PostsSuppliers";
 import CustomChatBot from "./components/CustomChatBot/CustomChatBot";
 import Sidebar from "./views/DashboardSuppliers/Sidebar/Sidebar";
+import FormCliente from "./views/FormCliente/FormCliente.jsx";
+
 
 function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);
@@ -76,8 +78,6 @@ function App() {
         <Route path="/dashboardClient/help" element={<DashboardClientHelp />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/comofunciona" element={<HowDoesItWork />} />
-        <Route path="/registerProvider" element={<FromProvider />} />
-        <Route path="/registerCliente" element={<FormCliente />} />
         <Route path="/createPost" element={<FormServicio />} />
         <Route path="/detail/:id" element={<DetailSupplier />} />
         <Route path="/userLogin" element={<UserLogin />} />

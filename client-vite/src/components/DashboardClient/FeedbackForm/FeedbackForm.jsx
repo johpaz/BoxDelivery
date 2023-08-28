@@ -19,8 +19,8 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
-import { updateFeedback } from '../../../services/redux/actions/actions';
-import SupplierSelect from './SupplierSelect'; // Importa el componente SupplierSelect desde su ubicación
+//import { updateFeedback } from '../../../services/redux/actions/actions';
+import SupplierSelect from './SupplierSelect';// Importa el componente SupplierSelect desde su ubicación
 
 function FeedbackForm() {
   const dispatch = useDispatch();

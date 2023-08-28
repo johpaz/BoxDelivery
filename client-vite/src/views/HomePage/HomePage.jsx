@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
 import { Box, Divider, useColorMode } from '@chakra-ui/react';
 import Footer from '../../components/Footer/Footer';
 import TopPro from '../../components/Home/TopPro/TopPro'
@@ -8,15 +7,21 @@ import TestimonialCarrousel from '../../components/Home/TestimonialCarrousel/Tes
 import HowItWorks from '../../components/Home/HowItWorks/HowItWorks'
 import TipoVehiculoSection from '../../components/Home/TipoVehiculoSection/TipoVehiculoSection'
 import Map from '../../components/Home/MapSection/Map';
-import { getAllPilotos } from '../../../services/redux/actions/actions';
+import  {getAllPilotos} from '../../services/redux/slice/pilotoSlice';
+import { useDispatch } from 'react-redux';
+import { getAllTipoVehiculo } from '../../services/redux/slice/tipoVehiculoSlice'; 
 
 
 const HomePage = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
   const { colorMode } = useColorMode();
+  
+  
   useEffect(() => {
     dispatch(getAllPilotos())
+    dispatch(getAllTipoVehiculo())
   }, []);
+  
     // Define the general background color according to the color mode
   const backgroundColor = colorMode === 'dark' ? 'gray.800' : 'gray.100';
 

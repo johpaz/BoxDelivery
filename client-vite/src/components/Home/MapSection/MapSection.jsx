@@ -5,8 +5,9 @@ import 'leaflet/dist/leaflet.css';
 import iconMoto from './iconmoto.png';
 
 
+
 const MapSection = () => {
-  const pilotos = useSelector((state) => state.pilotos);
+  const pilotos = useSelector((state) => state.pilotos.pilotos);
 
   // Coordenadas de latitud y longitud de Bogota
   const initialPosition = [4.710989, -74.072092];
@@ -49,7 +50,7 @@ const MapSection = () => {
       }}
     >
       {/* El componente MapContainer debe tener un tamaño definido para que el mapa sea visible */}
-      <MapContainer center={initialPosition} zoom={15} style={{ height: '100%' }} onClick={handleMapClick}>
+      <MapContainer center={initialPosition} zoom={10} style={{ height: '100%' }} onClick={handleMapClick}>
        
         {/* Agrega los marcadores y popups para el equipo de programadores */}
       

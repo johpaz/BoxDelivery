@@ -3,7 +3,7 @@ import { Heading, Stack } from '@chakra-ui/layout'
 import { useColorModeValue } from '@chakra-ui/color-mode'
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
 import { useEffect } from 'react'
-import { usePostDash } from '../../../../services/zustand/usePostDash'
+//import { usePostDash } from '../../../../services/zustand/usePostDash'
 import PostUsersTable from '../UsersTable/PostUsersTable'
 
 export default function PostManagement () {

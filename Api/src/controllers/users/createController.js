@@ -1,11 +1,12 @@
 const User = require('../../models/userModel');
+const jwt = require('jsonwebtoken'); // Asegúrate de tener instalado el paquete 'jsonwebtoken'
 
-exports.createLocalUser = async (req, res) => {
+exports.createLocalUser = async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const { email, password, userType } = req.body;
 
     // Validar que los campos obligatorios estén presentes
-    if (!name || !email || !password) {
+    if (!email || !password) {
       return res.status(400).json({ message: 'Todos los campos son obligatorios' });
     }
 
@@ -15,13 +16,32 @@ exports.createLocalUser = async (req, res) => {
       return res.status(400).json({ message: 'El usuario ya existe' });
     }
 
-    // Crear un nuevo usuario con los detalles proporcionados
-    const newUser = new User({ name, email, password });
-    await newUser.save();
+    try {
+      
+      const piloto = "Piloto"
+      // Determina el tipo de usuario
+      let userType = piloto ? 'piloto' : 'cliente';
 
-    return res.status(201).json(newUser);
+      
+      // Determina la ruta de redirección
+      let redirectPath = userType === 'piloto' ? '/FormPiloto' : '/FormClient';
+
+      // Crear un nuevo usuario con los detalles proporcionados
+      const newUser = new User({ email, password });
+      console.log(newUser);
+      await newUser.save();
+      
+      // Generar el token de acceso
+      const accessToken = jwt.sign({ userId: newUser._id, userType },'clave-secreta-del-token', { expiresIn: '1h' });
+
+      // Enviar el token de acceso, el tipo de usuario y el mensaje de éxito al cliente
+      return res.status(200).json({ success: true, userType, accessToken, redirectPath, message: "Session Iniciada" });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Error en el servidor' });
+    }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Ocurrió un error en el servidor' });
+    return res.status(500).json({ error: 'Error en el servidor' });
   }
 };

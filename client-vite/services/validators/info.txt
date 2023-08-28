@@ -1,1 +1,0 @@
-En esta carpeta se pueden colocar las funciones para validacion de campos o en si de cualquier dato que se quiera validar, esto es para modulzarizar mas el codigo y poder reutilizar esas funciones en varias partes del proyecto

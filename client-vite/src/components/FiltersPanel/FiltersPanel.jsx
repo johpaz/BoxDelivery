@@ -9,15 +9,15 @@ import {
   useColorModeValue
 } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
-import { applyFilters, getAllSuppliers } from '../../services/redux/actions/actions'
-import SelectCategories from '../../singleComponents/SelectCategories'
-import FilterByRating from '../Filteres/FilterByRating'
-import FilterByGenres from '../Filteres/FilterByGenres'
+//import { applyFilters, getAllSuppliers } from '../../services/redux/actions/actions'
+import TipoVehiculoSection from '../Home/TipoVehiculoSection/TipoVehiculoSection'
+//import FilterByRating from '../Filteres/FilterByRating'
+//import FilterByGenres from '../Filteres/FilterByGenres'
 
 export default function FiltersPanel ({ setCurrentPage }) {
   const dispatch = useDispatch()
   const filters = useSelector(state => state.filters)
-  const categorySelected = filters.category || ''
+  const tipoVehiculoSelected = filters.tipoVehiculo || ''
 
   const ocupationSelected = filters.ocupation || ''
   const ratingSelected = filters.rating || ''
@@ -26,8 +26,8 @@ export default function FiltersPanel ({ setCurrentPage }) {
   const bgElement = useColorModeValue('white', 'gray.800')
   const txtColor = useColorModeValue('gray.600', 'gray.100')
 
-  function handleSelectCategory (value) {
-    dispatch(applyFilters({ filter: 'category', value }))
+  function handleSelecttipoVehiculo (value) {
+    dispatch(applyFilters({ filter: 'tipoVehiculo', value }))
     dispatch(applyFilters({ filter: 'ocupation', value: '' }))
     dispatch(getAllSuppliers())
     setCurrentPage(1)
@@ -63,8 +63,8 @@ export default function FiltersPanel ({ setCurrentPage }) {
         direction='row'
         wrap='wrap'
       >
-        <SelectCategories
-          fnSelectCategory={handleSelectCategory}
+        <TipoVehiculoSection
+          fnSelecttipoVehiculo={handleSelecttipoVehiculo}
           fnSelectOcupation={handleSelectOcupation}
           setCurrentPage={setCurrentPage}
         />
@@ -88,8 +88,8 @@ export default function FiltersPanel ({ setCurrentPage }) {
         >
           <Text>
             {`Resultados para
-            ${categorySelected === 'Categorias' || categorySelected === 'Todas' ? '' : categorySelected + ' 🔹'} 
-            ${ocupationSelected === 'Ocupacion' || ocupationSelected === '' || ocupationSelected === 'Selecciona una categoria' ? '' : ocupationSelected + ' 🔹'}
+            ${tipoVehiculoSelected === 'TiposVehiculos' || tipoVehiculoSelected === 'Todas' ? '' : tipoVehiculoSelected + ' 🔹'} 
+            ${ocupationSelected === 'Ocupacion' || ocupationSelected === '' || ocupationSelected === 'Selecciona un Tipo de Vehiculo' ? '' : ocupationSelected + ' 🔹'}
             ${ratingSelected === 'Rating' || ratingSelected === 'Aleatorio' ? '' : ratingSelected + ' 🔹'}
             ${genreSelected === 'Genero' || genreSelected === 'todos' ? '' : genreSelected}`}
           </Text>

@@ -22,11 +22,8 @@ import {
   useColorModeValue
 } from "@chakra-ui/react";
 
-import {
-  getAllClients,
-  updateClient,
-} from "../../../services/redux/actions/actions";
-import { uploadFiles3 } from "../../../utils/Firebase/config";
+//import { getAllClients, updateClient} from "../../../services/redux/actions/actions";
+//import { uploadFiles3 } from "../../../utils/Firebase/config";
 
 function EditClient() {
   const dispatch = useDispatch();
