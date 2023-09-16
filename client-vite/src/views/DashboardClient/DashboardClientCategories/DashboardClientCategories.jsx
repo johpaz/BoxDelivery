@@ -1,5 +1,5 @@
 import { Grid, Box,Flex} from '@chakra-ui/react';
-import Categories from "../../Categories/Categories"
+import Categories from "../../Categories/TipoVehiculo"
 
 import SidebarClient from '../../../components/DashboardClient/SidebarClient/SidebarClient';
 

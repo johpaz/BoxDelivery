@@ -11,15 +11,15 @@ const clienteProfileSchema = new mongoose.Schema({
     ref: 'Role',
     required: true
   },
+  name: String,
   profileImage: String,
-  email: String,
   phone: String,
   address: String,
   rating: {
     type: Number,
-    default: 0 // Puedes establecer un valor predeterminado para el rating
+    default: 5 
   },
-  // Otros campos adicionales que puedas necesitar para el perfil del cliente
+    // Otros campos adicionales que puedas necesitar para el perfil del cliente
 });
 
 const ClienteProfile = mongoose.model('ClienteProfile', clienteProfileSchema);

@@ -24,6 +24,8 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
+
+
 const emailValidationSchema = Yup.object().shape({
   email: Yup.string().email("Correo electrónico inválido").required("Campo obligatorio"),
   password: Yup.string().required("Campo obligatorio"),
@@ -40,8 +42,16 @@ export default function UserLogin() {
   const txtColor = useColorModeValue("gray.600", "gray.100");
   const navigate = useNavigate();
   const session = useSelector((state) => state.session); // Obtén el estado actual de la sesión
-  
 
+  const sessionData = {
+    id:session.id,
+    success: session.success,
+    userType: session.userType,
+    accessToken: session.accessToken,
+    redirectPath: session.redirectPath,
+    profileImage: session.profileImage
+  };
+  localStorage.setItem('session', JSON.stringify(sessionData));
   // Manejar la redirección cuando el estado de sesión cambie
   useEffect(() => {
     if (session.success === true) {
@@ -55,7 +65,6 @@ export default function UserLogin() {
       });
     }
   }, [session.success, session.redirectPath, navigate, toast]);
-
   
     return (
       <Flex minH="100vh" align="center" justify="center" bg={bgColor}>
@@ -88,7 +97,8 @@ export default function UserLogin() {
               }
             }}
           >
-  
+    
+
     <Form>
             <Box rounded="lg" bg={bgElement} shadow="lg" p={8}>
               <Stack spacing={4}>

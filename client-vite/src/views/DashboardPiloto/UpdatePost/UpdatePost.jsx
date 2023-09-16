@@ -12,13 +12,6 @@ import {
   Button,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { uploadFiles2 } from "../../../utils/Firebase/config";
-import {
-  getAllCategories,
-  updatePosts,
-} from "../../../services/redux/actions/actions";
-import { useSessionState } from "../../../services/zustand/useSession";
-import SelectCategories from "../../../singleComponents/SelectCategories";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom"
 

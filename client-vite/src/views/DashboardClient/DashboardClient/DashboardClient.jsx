@@ -1,17 +1,19 @@
 import { Grid,Box, useMediaQuery,Flex,Spacer } from '@chakra-ui/react';
-import IntroductionDash from '../../../components/DashboardClient/IntroductionDash/IntroductionDash';
+import SolicitudEntrega from '../../../components/DashboardClient/PedirDelivery/pedirDelivery';
 
 import SidebarClient from '../../../components/DashboardClient/SidebarClient/SidebarClient';
 
 const DashboardClient = () => {
 
+
+  
   return (
     //! Como estaba antes
   
     <Flex>
       <SidebarClient />
       <Spacer  />
-      <IntroductionDash/>
+      <SolicitudEntrega/>
     </Flex>
       
     // <Box display={{ base: 'grid', lg: 'flex' }} height="100vh">

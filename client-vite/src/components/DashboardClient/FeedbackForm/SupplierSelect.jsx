@@ -14,16 +14,6 @@ const SupplierSelect = ({ onSupplierSelect }) => { // Agregamos la prop onSuppli
   const suppliers = useSelector((state) => state.suppliers);
   const [selectedSupplier, setSelectedSupplier] = useState(null);
 
-  // useEffect(() => {
-  //   dispatch(getAllSuppliers());
-  // }, [dispatch]);
-
-  // Transformando los datos de los proveedores al formato esperado por el Select
-  // const supplierOptions = suppliers.map((supplier) => ({
-  //   value: supplier.id,
-  //   label: supplier.name,
-  // }));
-
   // Función que se activa cuando se selecciona un proveedor
   const handleSupplierSelect = (selectedOption) => {
     setSelectedSupplier(selectedOption);

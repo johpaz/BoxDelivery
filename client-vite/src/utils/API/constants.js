@@ -19,5 +19,6 @@ export const LOCAL = Object.freeze({
   
 })
 export const GOOGLE = Object.freeze({
-  CLIENT_ID : '211861086838-kg367a660po4qkd2k88jaig5s9t11fvk.apps.googleusercontent.com'
+  CLIENT_ID : '211861086838-kg367a660po4qkd2k88jaig5s9t11fvk.apps.googleusercontent.com',
+  API_KEY: 'AIzaSyAvXQBx9uvycrYocYufoVj2eYP28Pu7sTY'
 })

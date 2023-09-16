@@ -1,10 +1,11 @@
 const axios = require('axios');
 const { API_KEY } = process.env;
 const calcularDistancia = async (ubicacionInicial, ubicacionDestino) => {
+  console.log(ubicacionInicial);
    
-  const apiKey = 'AIzaSyAvXQBx9uvycrYocYufoVj2eYP28Pu7sTY'; // Reemplaza con tu clave de API de Google
+  const apiKey = API_KEY; // Reemplaza con tu clave de API de Google
     
-  const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(ubicacionInicial.lat + ',' + ubicacionInicial.lon)}&destinations=${encodeURIComponent(ubicacionDestino.lat + ',' + ubicacionDestino.lon)}&key=${apiKey}`;
+  const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(ubicacionInicial)}&destinations=${encodeURIComponent(ubicacionDestino  )}&key=${apiKey}`;
 
    
   try {

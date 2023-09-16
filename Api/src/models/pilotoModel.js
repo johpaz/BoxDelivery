@@ -16,7 +16,10 @@ const pilotoProfileSchema = new mongoose.Schema({
   email: String,
   phone: String,
   address: String,
-  isPiloto: Boolean,
+  isPiloto: {
+    type: Boolean,
+    default: false,
+  },
   rating: {
     type: Number,
     default: 5 

@@ -34,18 +34,22 @@ export default function LoggedNavbar() {
   const navigate = useNavigate();
   const toast = useToast();
   const session = useSelector(state => state.session);
+  const profile = useSelector(state => state.profile)
   const { colorMode } = useColorMode();
   const dispatch = useDispatch();
 
 
-  function handleLogout() {
-   
-  
+  async function handleLogout() {
+    localStorage.setItem('id', '');
+    localStorage.setItem('success', '');
+    localStorage.setItem('accessToken', '');
+    localStorage.setItem('userType', '');
+    localStorage.setItem('redirectPath', '');
+    localStorage.setItem('profileImage','')  
     // Llama a la acción para borrar los datos de la sesión en el estado
-    dispatch(removeSessionState());
-  
+    await  dispatch(removeSessionState());
       // Puedes agregar aquí la lógica para cerrar la sesión si es necesario
-    window.localStorage.removeItem('userSession');
+   
       toast({
       title: 'Sesión finalizada',
       description: 'Esperamos verte de nuevo',
@@ -61,6 +65,7 @@ export default function LoggedNavbar() {
     });
     navigate('/');
   }
+
 
   return (
     <nav style={{
@@ -105,8 +110,8 @@ export default function LoggedNavbar() {
               fontWeight='bold'
             >
               <NavLink textLink='¿CÓMO FUNCIONA?' routeLink='/comofunciona' />
-              <NavLink textLink='PROFESIONALES' routeLink='/categories' />
-              <NavLink textLink='CONTACTO' routeLink='/feedback' />
+              <NavLink textLink='PILOTOS' routeLink='/pilotos' />
+              <NavLink textLink='CONTACTO' routeLink='/feedback'/>
               <NavLink textLink='ACERCA DE' routeLink='/aboutus' />
             </HStack>
           </HStack>
@@ -124,7 +129,7 @@ export default function LoggedNavbar() {
               >
                 <Avatar
                   size={{ base: 'md', md: 'lg', lg: 'lg' }}
-                  src={session.image || SinFoto}
+                  src={profile.profileImage || SinFoto}
                 />
               </MenuButton>
               <MenuList>
@@ -139,7 +144,7 @@ export default function LoggedNavbar() {
                 }
                 {
                   (session.userType === 'piloto')
-                    ? <MenuItem onClick={() => navigate('/registerCliente')}>Ver mi perfil</MenuItem>
+                    ? <MenuItem onClick={() => navigate('/FormPiloto')}>Ver mi perfil</MenuItem>
                     : null
                 }
                 <MenuDivider />

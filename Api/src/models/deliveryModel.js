@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const deliverySchema = new mongoose.Schema({
   clienteId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Profile', // Referencia al modelo de perfil del cliente
-    required: true
+    ref: 'ClienteProfile', // Referencia al modelo de perfil del cliente
+    
   },
   profileId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Profile', // Referencia al modelo de perfil del piloto
+    ref: 'PilotoProfile', // Referencia al modelo de perfil del piloto
   },
   ubicacionInicial: {
     lat: { type: Number, required: true },
@@ -36,15 +36,15 @@ const deliverySchema = new mongoose.Schema({
   },
   mediosDePago: { 
     type: String,
-    enum:['efectivo','tarjeta','botonDePago','PSE'],
+    enum:['Efectivo','Tarjeta de Credito','Boton de Pago','PSE','Nequi','Daviplata'],
     default: 'pendiente',
     required: true
   },
   tipoVehiculo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'TipoVehiculo', // Referencia al modelo de tipos de vehículos
+    type: String, // Cambiado a String en lugar de mongoose.Schema.Types.ObjectId
     required: true
   },
+  
   estado: {
     type: String,
     enum: ['pendiente', 'asignado', 'en_camino', 'entregado','devuelto'],

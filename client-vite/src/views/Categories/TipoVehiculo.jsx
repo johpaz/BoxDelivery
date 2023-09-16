@@ -1,14 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Stack, useColorModeValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-//import { cleanDetail,  getAllSuppliers,} from "../../services/redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import SupplierCardsContainer from "../../components/SupplierCardsContainer/SupplierCardsContainer";
 import FiltersPanel from "../../components/FiltersPanel/FiltersPanel";
-import Paginator from "./../../components/Paginator/Paginator";
-import styles from "./Categories.module.css";
+import Paginator from "../../components/Paginator/Paginator";
+import styles from "./TipoVehiculo.module.css";
 
-const Categories = () => {
+const TipoVehiculo = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -43,4 +42,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default TipoVehiculo;

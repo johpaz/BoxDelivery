@@ -55,16 +55,9 @@ const SidebarClient = () => {
           >
             <Text>Recomendados</Text>
           </NavLink>
-          {/* <NavLink
-            to="/categories"
-            style={linkStyle}
-            activeClassName="active"
-          >
-            <Text>Profesionales</Text>
-          </NavLink> */}
-          {/* <NavLink to="/dashboardClient/favorites" style={linkStyle} activeClassName='active'>
-            <Text>Favoritos</Text>
-          </NavLink> */}
+          <NavLink to="/dashboardClient/delivery" style={linkStyle} activeClassName="active">
+            <Text>Servicios Activos</Text>
+          </NavLink>
           <NavLink
             to="/dashboardClient/feedbackform"
             style={linkStyle}

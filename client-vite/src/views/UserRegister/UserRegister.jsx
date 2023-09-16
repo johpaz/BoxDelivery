@@ -14,17 +14,16 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { useForm } from "react-hook-form";
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../services/redux/slice/sessionSlice'; // Import the registerUser action
-import DropdownMenu from './../../singleComponents/DropdownMenu';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { GOOGLE } from '../../utils/API/constants'; 
-import GoogleAuthButton from '../../singleComponents/GooglAuthButton'
+import GoogleAuthButton from '../../singleComponents/GooglAuthButton';
 
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
@@ -35,14 +34,20 @@ const validationSchema = Yup.object().shape({
 export default function UserRegister() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
-  const [usuario, setUser] = useState(null);
-  const userTypes = [
-    { name: 'Cliente' },
-    { name: 'Piloto' }
-  ];
   const navigate = useNavigate();
   const toast = useToast();
   const session = useSelector((state) => state.session); // Obtén el estado actual de la sesión
+    
+  
+  const {
+    setValue,
+    formState: { errors },
+    } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
   
 
   // Manejar la redirección cuando el estado de sesión cambie
@@ -51,25 +56,29 @@ export default function UserRegister() {
     navigate(session.redirectPath);
     toast({
       title: "Sesión iniciada",
-      description: "¡Bienvenido de nuevo!",
+      description: "¡Bienvenido!",
       status: "success",
       duration: 3000,
       isClosable: true,
     });
+    const sessionData = {
+      id:session.id,
+      success: session.success,
+      accessToken: session.accessToken,
+      redirectPath: session.redirectPath,
+      }; console.log(sessionData);
+      
+    localStorage.setItem('session', JSON.stringify(sessionData));
+    
   }
 }, [session.success, session.redirectPath, navigate, toast]);
 
-  function handleSelectUser(event) {
-    const { name } = event.target;
-    setUser(name);
-    }
 
   async function handleSubmit(values) {
     try {
       const dataRegistration = {
         email: values.email,
         password: values.password,
-        userType: usuario,
         // ... other registration data ...
       };
 
@@ -113,8 +122,7 @@ export default function UserRegister() {
             initialValues={{
               email: '',
               password: '',
-              userType:'',
-            }}
+              }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
@@ -139,12 +147,7 @@ export default function UserRegister() {
                 </InputGroup>
                 <ErrorMessage name="password" component={Text} color="red.500" />
               </FormControl>
-              <DropdownMenu
-                id="userType"
-                titleMenu={usuario}
-                menuItems={userTypes}
-                onClick={handleSelectUser}
-              />
+             
               <Stack spacing={10} pt={2}>
                 <Button
                   type="submit"
@@ -160,9 +163,15 @@ export default function UserRegister() {
                 </Button>
               </Stack>
               <Stack spacing={10} pt={2}>
-              <GoogleAuthButton
-                  setValue={setValue}
-                />              
+               <GoogleAuthButton value={setValue}
+               type="submit"
+               loadingText="Registrando"
+               size="lg"
+               bg="blue.400"
+               color="white"
+               _hover={{
+                 bg: 'blue.500',
+               }}/>
               </Stack>
               <Stack pt={6}>
                 <Text align="center">

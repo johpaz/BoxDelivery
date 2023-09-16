@@ -1,81 +1,62 @@
+const crypto = require('crypto');
 const express = require('express');
-const passport = require('passport');
 const session = require('express-session');
-const index = require('./src/routes/index');
-const LocalStrategy = require('passport-local').Strategy;
-const connectDB = require('./db');
-const User = require('./src/models/userModel');
 const cors = require('cors');
-const dotenv = require('dotenv');
 const morgan = require('morgan');
+const connectDB = require('./db');
+const passportConfig = require('./passport-config'); // Importar la configuración de Passport
+const googleAuthConfig = require('./google-auth-conf'); // Importar la configuración de Google Authentication
+const index = require('./src/routes/index');
+const fileUpload = require('express-fileupload')
+const multer = require('multer');
+const bodyParser = require("body-parser");
 
-dotenv.config();
 
 const app = express();
+
+// Conectar a la base de datos
 connectDB();
 
-app.use(cors());
-app.use(morgan('dev'));
+// Generar una clave secreta aleatoria
+const secretKey = crypto.randomBytes(32).toString('hex');
+console.log('Secret Key:', secretKey);
+
+
+// Configuración de Multer
+const storage = multer.memoryStorage(); // Almacenar archivos en memoria
+const upload = multer({ storage: storage });
+
+// Configuración general
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors());
+app.use(morgan('dev'));
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: secretKey,
   resave: false,
   saveUninitialized: true
 }));
+// Configura body-parser con un límite de 10 MB (ajusta según tus necesidades)
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+// Configuración de Passport y Google Authentication
+app.use(passportConfig.initialize());
+app.use(passportConfig.session());
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+// Configuración de Google Authentication
+app.use(googleAuthConfig.initialize());
+app.use(googleAuthConfig.session());
 
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (error) {
-    done(error);
-  }
-});
+//Mildelware
 
-passport.use(new LocalStrategy(
-  { usernameField: 'email' },
-  async (email, password, done) => {
-    try {
-      const user = await User.findOne({ email });
-      if (!user) {
-        return done(null, false, { message: 'Usuario no encontrado' });
-      }
-      if (user.password !== password) {
-        return done(null, false, { message: 'Contraseña incorrecta' });
-      }
-      return done(null, user);
-    } catch (error) {
-      return done(error);
-    }
-  }
-));
+app.use(fileUpload())
 
-//Para mensaje flash e inicios de sesion:
-const flash = require('connect-flash');
 
-const authgoogle= require ('../src/middlewares/google/google')
-const loginGoogleRouter = require('./routes/googleRoutes.js');
-
-app.use('/auth',  passport.authenticate(authgoogle,{
-  scope: [
-      "https://www.googleapis.com/auth/userinfo.profile",
-      "https://www.googleapis.com/auth/userinfo.email"
-  ],
-session: false,
-}), loginGoogleRouter);
-
+// Rutas
 app.use('/', index);
-
-const port = process.env.PORT || 3004; // Default to port 3004 if not provided
+// Iniciar servidor
+const port = process.env.PORT ;
 app.listen(port, () => {
   console.log(`Server started on http://localhost:${port}`);
 });

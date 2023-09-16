@@ -2,18 +2,18 @@
 import { Input, Button, Chip } from "@nextui-org/react";
 import { useJsApiLoader, GoogleMap, Marker, Autocomplete,DirectionsRenderer } from "@react-google-maps/api";
 import { useState,useRef } from "react";
-import { createContext, useContext } from "react";
+import {GOOGLE} from '../../utils/API/constants'
 
 const containerStyle = {
   width: "100%",
   height: "400px",
 };
 
-
+const KEY = GOOGLE.API_KEY
 const MapComponent = () => {
   const centerBogota = { lat: 4.710989, lng: -74.072090 };
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: 'AIzaSyAvXQBx9uvycrYocYufoVj2eYP28Pu7sTY',
+    googleMapsApiKey: KEY,
     libraries: ["places"],
   });
   const [map, setMap] = useState(null);

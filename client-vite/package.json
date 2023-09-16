@@ -17,7 +17,11 @@
     "@emailjs/browser": "3.11.0",
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "github:fortawesome/react-fontawesome",
     "@mercadopago/sdk-react": "0.0.14",
+    "@react-google-maps/api": "2.19.2",
+    "@react-oauth/google": "^0.11.1",
     "@reduxjs/toolkit": "1.9.5",
     "audit": "0.0.6",
     "axios": "1.4.0",
@@ -33,7 +37,6 @@
     "npm": "9.8.1",
     "react": "18.2.0",
     "react-chartjs-2": "5.2.0",
-    "react-dom": "18.2.0",
     "react-hook-form": "7.45.4",
     "react-icons": "4.10.1",
     "react-leaflet": "4.2.1",
@@ -49,8 +52,7 @@
     "slick-carousel": "1.8.1",
     "styled-components": "^6.0.7",
     "uuid": "9.0.0",
-    "yup": "1.2.0",
-    "zustand": "4.4.1"
+    "yup": "1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

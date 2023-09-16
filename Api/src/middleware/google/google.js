@@ -1,5 +1,5 @@
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const { sequelize } = require('../../db');
+//const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+//const { sequelize } = require('../../../app');
 const { config } = require('dotenv');
 config();
 
@@ -67,7 +67,7 @@ const execute = async (accessToken, refreshToken, profile, done) => {
 
     const userData = {
       usuario: usuario,
-      id: id,
+      id: _id,
     };
     done(null, userData);
   } else {

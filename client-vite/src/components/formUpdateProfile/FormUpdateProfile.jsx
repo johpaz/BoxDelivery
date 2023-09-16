@@ -19,11 +19,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import {
-  getAllClients,
-  updateProfesionals,
-} from "../../../services/redux/actions/actions";
-import { uploadFiles3 } from "../../../utils/Firebase/config";
+
+
 
 function FormUpdateProfile() {
   const dispatch = useDispatch();

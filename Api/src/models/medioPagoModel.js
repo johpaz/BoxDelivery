@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const medioPagoSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
   descripcion: { type: String, required: true },
+  habilitado:{ type:Boolean}
 });
 
 // Crear el modelo de medio de pago a partir del esquema

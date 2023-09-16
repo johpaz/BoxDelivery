@@ -1,13 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { API } from "../../../utils/API/constants";
 
+
 const initialState = {
-  id: 1,
+  id: "",
+  clienteId:"",
+  pilotoId:"",
   message: "",
   accessToken:"",
   redirectPath:"",
   success: false,
-  userType: ""
+  userType: "",
+  profileImage:""
 };
 
 const sessionSlice = createSlice({

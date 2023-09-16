@@ -1,57 +1,43 @@
-/* eslint-disable camelcase */
-/* eslint-disable react/prop-types */
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react'
-import { useToast } from '@chakra-ui/toast'
-import { Button } from '@chakra-ui/button'
-import { useDispatch } from 'react-redux'
-import { loginSessionGoogle } from '../services/redux/slice/sessionSlice' 
-import jwt_decode from 'jwt-decode'
-import { GOOGLE } from '../utils/API/constants'
+import React, { useEffect } from 'react';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GOOGLE } from '../utils/API/constants';
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from 'jwt-decode';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../services/redux/slice/sessionSlice'; 
 
-export default function GoogleAuthButton ({ setValue }) {
-  const dispatch = useDispatch()
-  const toast = useToast()
+export default function GoogleAuthButton({ setValue }) {
   const CLIENT_ID = `${GOOGLE.CLIENT_ID}`;
-  console.log(CLIENT_ID);
-  async function handleCallbackResponse (response) {
-    dispatch(loginSessionGoogle())
-    const userObject = jwt_decode(response.credential)
+  const dispatch = useDispatch();
 
-    setValue('name', userObject.name)
-    setValue('email', userObject.email)
-    setValue('password', `${userObject.given_name.toLowerCase()}GOOAT0`)
-    userObject && toast({
-      title: 'Cuenta vinculada',
-      description: 'Completa los demas campos para finalizar el registro',
-      status: 'success',
-      position: 'bottom-right',
-      duration: 5000,
-      isClosable: true
-    })
-  }
+  const handleGoogleLogin = async (credentialResponse,setValue) => {
+    try {
+      // Decodificar la respuesta de Google
+      const decoded = jwt_decode(credentialResponse.credential);
+      console.log(decoded);
+      // Crear un objeto con los datos del formulario y la respuesta de Google
+      const dataSession = {
+        email: decoded.email,
+        password: decoded.name, // Contraseña temporal o generada
+        userType: setValue, // Ajusta según la lógica de tu aplicación
+      };
 
-  useEffect(() => {
-    // eslint-disable-next-line no-undef
-    google.accounts.id.initialize({
-      client_id: CLIENT_ID,
-      callback: handleCallbackResponse
-    })
-    // eslint-disable-next-line no-undef
-    google.accounts.id.renderButton(
-      document.getElementById('g_id_onload'),
-      { theme: 'outline', size: 'large', data_width: '220px' }
-    )
-  }, [])
+      // Enviar los datos al servidor para autenticación
+      await dispatch(registerUser(dataSession));
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
 
   return (
-    <Button
-      id='g_id_onload'
-      bg='gray.50'
-      h='50px'
-      _hover={{
-        bg: 'gray.50'
-      }}
-    />
-  )
+    <GoogleOAuthProvider clientId={CLIENT_ID}>
+      <GoogleLogin
+        onSuccess={handleGoogleLogin}
+        onError={() => {
+          console.log('Login Failed');
+        }}
+      />
+      ;
+    </GoogleOAuthProvider>
+  );
 }

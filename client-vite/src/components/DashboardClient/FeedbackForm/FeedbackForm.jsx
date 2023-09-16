@@ -23,6 +23,7 @@ import { CheckIcon } from '@chakra-ui/icons';
 import SupplierSelect from './SupplierSelect';// Importa el componente SupplierSelect desde su ubicación
 
 function FeedbackForm() {
+  
   const dispatch = useDispatch();
 
   const [content, setContent] = useState('');
@@ -80,7 +81,7 @@ function FeedbackForm() {
     const newData = {
       content: content,
       rating: Number(rating),
-      profesionalId: selectedSupplierId, // Usamos el ID del proveedor seleccionado
+      pilotoId: selectedSupplierId, // Usamos el ID del proveedor seleccionado
       clientId: clientId,
     };
     console.log("Data being sent:", newData);

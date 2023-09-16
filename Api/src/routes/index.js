@@ -1,7 +1,7 @@
 // app/routes/indexRoute.js
 const {Router}= require('express');
 
-const userRouter = require('./useerloginRoutes');
+const userRouter = require('./userloginRoutes');
 const loginRouter = require('./loginRoutes')
 const googleRouter = require('./googleRoutes2')
 const {profileRouter,clienteRouter,pilotoRouter} = require('./profileRoutes')
@@ -13,9 +13,12 @@ const asignaPermisosRouter = require('./aisgnaPermisosRoutes')
 const {deliveryRouter,transitoRouter,entregadoRouter}= require('./deliveryRoutes')
 const {medioPagoRouter} = require('./medioPagoRouter')
 const loginGoogleRouter=require('./googleRoutes2');
+const imageRouter = require('./imageRoutes')
 
 router = Router();
 
+
+router.use('/uploadImage', imageRouter);
 router.use('/mediospago', medioPagoRouter);
 router.use('/entrega', entregadoRouter);
 router.use('/transito', transitoRouter);

@@ -46,15 +46,11 @@ const createDeliveryHandler = async (req, res) => {
       mediosDePago,
       fotoRecoger,
      );
-     console.log(result);
-
-    if (result.success) {
-      res.status(200).json({ success: true, message: 'Servicio de entrega creado exitosamente.' });
-    } else {
-      res.status(400).json({ success: false, message: 'Error al crear el servicio de entrega.' });
-    }
+     
+    res.status(200).json(result);
+    
   } catch (error) {
-    console.error('Error al crear el servicio de entrega:', error);
+    console.error('Error al crear el servicio :', error);
     res.status(500).json({ success: false, message: 'Error interno del servidor.' });
   }
 };

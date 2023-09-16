@@ -13,7 +13,7 @@ const containerStyle = {
 const MapComponent = () => {
   const centerBogota = { lat: 4.710989, lng: -74.072090 };
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: 'AIzaSyAvXQBx9uvycrYocYufoVj2eYP28Pu7sTY',
+    googleMapsApiKey: '1233',
     libraries: ["places"],
   });
   const [map, setMap] = useState(null);

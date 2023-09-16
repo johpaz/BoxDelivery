@@ -2,7 +2,6 @@ require('dotenv').config();
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const PilotoProfile = require('../../models/pilotoModel');
 const ClienteProfile = require('../../models/clienteModel')
-const Role = require('../../models/roleModel')
 const user = require('../../models/userModel');
 const { ACCESS_KEY_ID, SECRET_ACCESS_KEY, BUCKET, IMAGE } = process.env;
 
@@ -17,9 +16,12 @@ const s3Client = new S3Client({
 // ... (importaciones y configuraciones)
 
 const createProfileWithImage = async (userId,name, role, profileImage, email, phone, address, isPiloto) => {
+  
   try {
-    // Decodificar la imagen base64 a un buffer de datos
-    const imageBuffer = Buffer.from(profileImage, 'base64');
+   // Decodificar la imagen base64 a un buffer de datos
+   const imageBuffer = Buffer.from(profileImage, 'base64');
+
+    console.log(imageBuffer);
     // Nombre de archivo basado en el nombre de usuario
     const imageFileName = `${userId}_perfil.png`;; // Cambiar la extensión según el formato de imagen
 
@@ -35,7 +37,7 @@ const createProfileWithImage = async (userId,name, role, profileImage, email, ph
     
     let newProfile;
 
-    if (isPiloto = true) {
+    if (isPiloto) {
       newProfile = new PilotoProfile({
         name:name,
         user: userId,
@@ -62,13 +64,30 @@ const createProfileWithImage = async (userId,name, role, profileImage, email, ph
     }
 
     await newProfile.save();
-
+    
     // Asignar el rol de piloto si es necesario
     if (isPiloto) {
       await user.findByIdAndUpdate(userId, { $set: { isPiloto: true } });
+      userType= 'piloto'
+      redirectPath = '/DashboardPiloto'
+      // Obtener el pilotoId después de guardar el perfil
+      const pilotoProfile = await PilotoProfile.findOne({ user: userId });
+      const pilotoId = pilotoProfile._id;
+    } else{
+    const userType='cliente'
+    const redirectPath = '/DashboardClient'
+    const clienteProfile = await ClienteProfile.findOne({ user: userId });
+    const clientId = clienteProfile._id;
     }
-
-    return { success: true, message: 'Perfil creado exitosamente.' };
+    return {
+      success: true,
+      userType,
+      profileImage: newProfile.profileImage,
+      redirectPath,
+      message: 'Perfil creado exitosamente.',
+      clientId, // Agregar clientId o pilotoId según corresponda
+      pilotoId // Agregar pilotoId o clientId según corresponda
+    };
   } catch (error) {
     console.error('Error al crear el perfil:', error);
     return { success: false, message: 'Error al crear el perfil.' };

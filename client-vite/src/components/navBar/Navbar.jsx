@@ -2,9 +2,9 @@ import {
   Box,
   IconButton,
   Menu,
+  MenuItem,
   MenuButton,
   MenuList,
-  MenuItem,
   Flex,
   Image,
   useColorModeValue,
@@ -21,11 +21,9 @@ import NavLink from "./../../singleComponents/NavLink";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  // const location = useLocation()
   const navbarBgColor = useColorModeValue("gray.200", "gray.900");
   const { colorMode } = useColorMode();
-  // variable para controlar la renderizacion de la searchbar"
-  // const isCategoriesRoute = location.pathname === '/categories'
+
 
   return (
     <nav
@@ -69,7 +67,7 @@ const Navbar = () => {
             color={useColorModeValue("gray.900", "gray.100")}
           >
             <NavLink textLink="¿Como funciona?" routeLink="/comofunciona" />
-            <NavLink textLink="Profesionales" routeLink="/categories" />
+            <NavLink textLink="Pilotos" routeLink="/TipoVehiculo" />
             <NavLink textLink="Contacto" routeLink="/feedback" />
             <NavLink textLink="Acerca de" routeLink="/aboutus" />
           </HStack>
@@ -88,32 +86,24 @@ const Navbar = () => {
               <MenuItem color={useColorModeValue("gray.900", "gray.100")} onClick={() => navigate("/comofunciona")} >
                 ¿Como funciona?
               </MenuItem>
-              <MenuItem color={useColorModeValue("gray.900", "gray.100")} onClick={() => navigate("/categories")}>
-                Profesionales
+              <MenuItem color={useColorModeValue("gray.900", "gray.100")} onClick={() => navigate("/TipoVehiculo")}>
+                Pilotos
               </MenuItem>
               <MenuItem
-                color={useColorModeValue("gray.900", "gray.100")}
-                onClick={() => navigate("/feedback")}
-              >
+                color={useColorModeValue("gray.900", "gray.100")}  onClick={() => navigate("/feedback")}>
                 Contacto
               </MenuItem>
               <MenuItem
-                color={useColorModeValue("gray.900", "gray.100")}
-                onClick={() => navigate("/aboutus")}
-              >
+                color={useColorModeValue("gray.900", "gray.100")} onClick={() => navigate("/aboutus")} >
                 Acerca de
               </MenuItem>
               
               <MenuItem
-                color={useColorModeValue("gray.900", "gray.100")}
-                onClick={() => navigate("/userLogin")}
-              >
+                color={useColorModeValue("gray.900", "gray.100")}onClick={() => navigate("/userLogin")}>
                 Iniciar Sesion
               </MenuItem>
               <MenuItem
-                color={useColorModeValue("gray.900", "gray.100")}
-                onClick={() => navigate("/userRegister")}
-              >
+                color={useColorModeValue("gray.900", "gray.100")}onClick={() => navigate("/userRegister")}>
                 Registrarse
               </MenuItem>
             </MenuList>
